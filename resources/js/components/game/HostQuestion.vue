@@ -71,7 +71,7 @@ const fastest = computed(() => {
             <div
                 v-for="(option, slot) in round.options"
                 :key="slot"
-                class="relative flex min-h-24 items-center gap-4 rounded-3xl p-5 text-2xl font-bold shadow-lg transition duration-500 lg:text-3xl"
+                class="relative flex h-24 items-center gap-4 rounded-3xl px-5 text-2xl font-bold shadow-lg transition duration-500 lg:h-28 lg:text-3xl"
                 :class="[
                     answerSlots[slot].bg,
                     reveal && reveal.correctSlot !== slot
@@ -87,7 +87,9 @@ const fastest = computed(() => {
                     :is="answerSlots[slot].icon"
                     class="size-9 shrink-0 fill-white/90 stroke-white"
                 />
-                <span class="flex-1">{{ option }}</span>
+                <span class="line-clamp-2 flex-1 leading-tight">{{
+                    option
+                }}</span>
                 <template v-if="reveal">
                     <Check
                         v-if="reveal.correctSlot === slot"
@@ -114,7 +116,7 @@ const fastest = computed(() => {
             </div>
         </div>
 
-        <footer class="grid gap-4">
+        <footer class="grid h-28 content-center gap-4">
             <template v-if="!reveal">
                 <CountdownBar
                     v-if="unlocked"

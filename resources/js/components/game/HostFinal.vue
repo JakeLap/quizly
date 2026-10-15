@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { Crown } from '@lucide/vue';
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import PlayerAvatar from '@/components/room/PlayerAvatar.vue';
 import { useTrans } from '@/composables/useTrans';
+import { animate } from '@/lib/motion';
 import type { RoomState } from '@/types/room';
 
 const props = defineProps<{ room: RoomState }>();
@@ -23,6 +24,28 @@ const podium = computed(() =>
     [rows.value[1], rows.value[0], rows.value[2]].filter(Boolean),
 );
 const heights: Record<number, string> = { 1: 'h-48', 2: 'h-36', 3: 'h-28' };
+
+const stage = ref<HTMLElement>();
+
+onMounted(() => {
+    for (const column of stage.value?.children ?? []) {
+        const rank = Number((column as HTMLElement).dataset.rank);
+
+        animate(
+            column,
+            [
+                { opacity: 0, transform: 'translateY(40px)' },
+                { opacity: 1, transform: 'none' },
+            ],
+            {
+                duration: 700,
+                delay: (3 - rank) * 700,
+                easing: 'ease-out',
+                fill: 'backwards',
+            },
+        );
+    }
+});
 </script>
 
 <template>
@@ -33,10 +56,12 @@ const heights: Record<number, string> = { 1: 'h-48', 2: 'h-36', 3: 'h-28' };
             {{ t('Final results') }}
         </h1>
 
-        <div class="flex items-end justify-center gap-4">
+        <!-- The podium rises 3rd, then 2nd, then 1st. -->
+        <div ref="stage" class="flex items-end justify-center gap-4">
             <div
                 v-for="row in podium"
                 :key="row.playerId"
+                :data-rank="row.rank"
                 class="flex w-40 flex-col items-center gap-2 lg:w-52"
             >
                 <Crown v-if="row.rank === 1" class="size-10 text-amber-300" />

@@ -38,6 +38,8 @@ watch(
                 form.patch(update.url(props.room.code), {
                     preserveScroll: true,
                     preserveState: true,
+                    // Saving in the background shouldn't flash the progress bar.
+                    showProgress: false,
                 }),
             350,
         );
