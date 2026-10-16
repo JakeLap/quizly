@@ -1,0 +1,2037 @@
+[
+    {
+        "ref": "cheese-origin:Q14088",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Μοτσαρέλα»;",
+                "options": ["Λετονία", "Ιταλία", "Σερβία", "Μεξικό"]
+            },
+            "en": {
+                "text": "Which country does mozzarella cheese come from?",
+                "options": ["Latvia", "Italy", "Serbia", "Mexico"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q131480",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Καμαμπέρ»;",
+                "options": ["Γαλλία", "Σερβία", "Λετονία", "Μεξικό"]
+            },
+            "en": {
+                "text": "Which country does Camembert cheese come from?",
+                "options": ["France", "Serbia", "Latvia", "Mexico"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q155922",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Παρμεζάνα»;",
+                "options": ["Μεξικό", "Λετονία", "Γαλλία", "Ιταλία"]
+            },
+            "en": {
+                "text": "Which country does Parmesan cheese come from?",
+                "options": ["Mexico", "Latvia", "France", "Italy"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q189221",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Ροκφόρ»;",
+                "options": ["Ελλάδα", "Ηνωμένο Βασίλειο", "Γαλλία", "Μεξικό"]
+            },
+            "en": {
+                "text": "Which country does Roquefort cheese cheese come from?",
+                "options": ["Greece", "United Kingdom", "France", "Mexico"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q540837",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Κοπανιστή»;",
+                "options": ["Γαλλία", "Ιταλία", "Σερβία", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does Kopanisti mykonou cheese come from?",
+                "options": ["France", "Italy", "Serbia", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q592173",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Πεκορίνο Σαρδηνίας»;",
+                "options": ["Ελλάδα", "Σερβία", "Ιταλία", "Ηνωμένο Βασίλειο"]
+            },
+            "en": {
+                "text": "Which country does Pecorino Sardo PDO cheese come from?",
+                "options": ["Greece", "Serbia", "Italy", "United Kingdom"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q677640",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Πεκορίνο»;",
+                "options": ["Ιταλία", "Ρουμανία", "Γαλλία", "Λετονία"]
+            },
+            "en": {
+                "text": "Which country does pecorino cheese come from?",
+                "options": ["Italy", "Romania", "France", "Latvia"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q940319",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Γκράνα Παντάνο»;",
+                "options": ["Κροατία", "Ρουμανία", "Ιταλία", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does Grana Padano PDO cheese come from?",
+                "options": ["Croatia", "Romania", "Italy", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q980288",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Πεκορίνο Τοσκάνης»;",
+                "options": ["Ιταλία", "Κροατία", "Ηνωμένο Βασίλειο", "Γαλλία"]
+            },
+            "en": {
+                "text": "Which country does Pecorino Toscano PDO cheese come from?",
+                "options": ["Italy", "Croatia", "United Kingdom", "France"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q1232535",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Κεφαλογραβιέρα»;",
+                "options": ["Σερβία", "Ελλάδα", "Γαλλία", "Μεξικό"]
+            },
+            "en": {
+                "text": "Which country does Kefalograviera cheese come from?",
+                "options": ["Serbia", "Greece", "France", "Mexico"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q1246024",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Πεκορίνο Ρομάνο»;",
+                "options": ["Ελλάδα", "Ρουμανία", "Ηνωμένο Βασίλειο", "Ιταλία"]
+            },
+            "en": {
+                "text": "Which country does Pecorino Romano PDO cheese come from?",
+                "options": ["Greece", "Romania", "United Kingdom", "Italy"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q1283428",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Πάσκι»;",
+                "options": ["Ελλάδα", "Μεξικό", "Κροατία", "Λετονία"]
+            },
+            "en": {
+                "text": "Which country does Pag cheese cheese come from?",
+                "options": ["Greece", "Mexico", "Croatia", "Latvia"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q2223649",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «γαλλικό τυρί»;",
+                "options": ["Ρουμανία", "Ηνωμένο Βασίλειο", "Γαλλία", "Ιταλία"]
+            },
+            "en": {
+                "text": "Which country does French cheese cheese come from?",
+                "options": ["Romania", "United Kingdom", "France", "Italy"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q5055615",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Κας»;",
+                "options": ["Ρουμανία", "Κροατία", "Γαλλία", "Ηνωμένο Βασίλειο"]
+            },
+            "en": {
+                "text": "Which country does Caş cheese come from?",
+                "options": ["Romania", "Croatia", "France", "United Kingdom"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q5414737",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «τυρί Οαχάκα»;",
+                "options": ["Γαλλία", "Ηνωμένο Βασίλειο", "Ιταλία", "Μεξικό"]
+            },
+            "en": {
+                "text": "Which country does hebra cheese cheese come from?",
+                "options": ["France", "United Kingdom", "Italy", "Mexico"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q5479342",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Σαν Μιχάλη»;",
+                "options": ["Ιταλία", "Ηνωμένο Βασίλειο", "Λετονία", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does San Michali cheese come from?",
+                "options": ["Italy", "United Kingdom", "Latvia", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q5489566",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Σφέλα»;",
+                "options": ["Ελλάδα", "Ρουμανία", "Ηνωμένο Βασίλειο", "Μεξικό"]
+            },
+            "en": {
+                "text": "Which country does sfela cheese come from?",
+                "options": ["Greece", "Romania", "United Kingdom", "Mexico"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q7259285",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «τυρί πούλε»;",
+                "options": ["Μεξικό", "Ελλάδα", "Ιταλία", "Σερβία"]
+            },
+            "en": {
+                "text": "Which country does Pule cheese cheese come from?",
+                "options": ["Mexico", "Greece", "Italy", "Serbia"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q8045571",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Ξυνότυρο»;",
+                "options": ["Κροατία", "Μεξικό", "Ελλάδα", "Ρουμανία"]
+            },
+            "en": {
+                "text": "Which country does Xynotyro cheese come from?",
+                "options": ["Croatia", "Mexico", "Greece", "Romania"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q9059385",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Πηχτόγαλο Χανίων»;",
+                "options": ["Σερβία", "Λετονία", "Ελλάδα", "Ρουμανία"]
+            },
+            "en": {
+                "text": "Which country does Pichtogalo Chanion cheese come from?",
+                "options": ["Serbia", "Latvia", "Greece", "Romania"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q12900108",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Γραβιέρα Αγράφων»;",
+                "options": ["Μεξικό", "Σερβία", "Ελλάδα", "Ηνωμένο Βασίλειο"]
+            },
+            "en": {
+                "text": "Which country does Graviera Agrafon cheese come from?",
+                "options": ["Mexico", "Serbia", "Greece", "United Kingdom"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q16359149",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «τυρί Γιάνι»;",
+                "options": ["Ρουμανία", "Σερβία", "Λετονία", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does Jāņi cheese cheese come from?",
+                "options": ["Romania", "Serbia", "Latvia", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q17315191",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Ιταλικό τυρί»;",
+                "options": ["Γαλλία", "Ιταλία", "Ρουμανία", "Λετονία"]
+            },
+            "en": {
+                "text": "Which country does Italian cheese cheese come from?",
+                "options": ["France", "Italy", "Romania", "Latvia"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q19361017",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «βρετανικό τυρί»;",
+                "options": ["Ηνωμένο Βασίλειο", "Γαλλία", "Ιταλία", "Σερβία"]
+            },
+            "en": {
+                "text": "Which country does British cheese cheese come from?",
+                "options": ["United Kingdom", "France", "Italy", "Serbia"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q27044265",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «ελληνικό τυρί»;",
+                "options": ["Ηνωμένο Βασίλειο", "Γαλλία", "Κροατία", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does Greek cheese cheese come from?",
+                "options": ["United Kingdom", "France", "Croatia", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "cheese-origin:Q55753739",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το τυρί «Αρσενικό Νάξου»;",
+                "options": ["Γαλλία", "Σερβία", "Ελλάδα", "Ηνωμένο Βασίλειο"]
+            },
+            "en": {
+                "text": "Which country does Arseniko Naxou cheese come from?",
+                "options": ["France", "Serbia", "Greece", "United Kingdom"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q375",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Βάφλα»;",
+                "options": ["Ιταλία", "Γαλλία", "Ουγγαρία", "Βιετνάμ"]
+            },
+            "en": {
+                "text": "Which country does the dish \"waffle\" come from?",
+                "options": ["Italy", "France", "Hungary", "Vietnam"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q12200",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κρέπα»;",
+                "options": [
+                    "Γαλλία",
+                    "Λαϊκή Δημοκρατία της Κίνας",
+                    "Ινδία",
+                    "Κροατία"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"crêpe\" come from?",
+                "options": [
+                    "France",
+                    "People's Republic of China",
+                    "India",
+                    "Croatia"
+                ]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q12491",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «μιλφέιγ»;",
+                "options": ["Ιράν", "Πακιστάν", "Ιαπωνία", "Γαλλία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"mille-feuille\" come from?",
+                "options": ["Iran", "Pakistan", "Japan", "France"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q20034",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «λασάνια»;",
+                "options": ["Ιταλία", "Κιργιζία", "Πολωνία", "Αρμενία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"lasagna\" come from?",
+                "options": ["Italy", "Kyrgyzstan", "Poland", "Armenia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q44541",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «τηγανίτα»;",
+                "options": [
+                    "Συρία",
+                    "Τουρκία",
+                    "Ηνωμένες Πολιτείες Αμερικής",
+                    "Λαϊκή Δημοκρατία της Κίνας"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"pancake\" come from?",
+                "options": [
+                    "Syria",
+                    "Turkey",
+                    "United States",
+                    "People's Republic of China"
+                ]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q141293",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «καϊμάκι»;",
+                "options": ["Πακιστάν", "Τουρκία", "Συρία", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does the dish \"dondurma\" come from?",
+                "options": ["Pakistan", "Turkey", "Syria", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q200527",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Μπιφτέκι»;",
+                "options": [
+                    "Συρία",
+                    "Ηνωμένες Πολιτείες Αμερικής",
+                    "Ιαπωνία",
+                    "Μεξικό"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"Salisbury steak\" come from?",
+                "options": ["Syria", "United States", "Japan", "Mexico"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q209486",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «σαλάτα νισουάζ»;",
+                "options": [
+                    "Ρωσία",
+                    "Ισπανία",
+                    "Γαλλία",
+                    "Ηνωμένες Πολιτείες Αμερικής"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"Niçard salad\" come from?",
+                "options": ["Russia", "Spain", "France", "United States"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q213105",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Νουντλς μπιάνγκμπιάνγκ»;",
+                "options": [
+                    "Κροατία",
+                    "Ελλάδα",
+                    "Ιαπωνία",
+                    "Λαϊκή Δημοκρατία της Κίνας"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"biangbiang noodles\" come from?",
+                "options": [
+                    "Croatia",
+                    "Greece",
+                    "Japan",
+                    "People's Republic of China"
+                ]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q390823",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Μπουρίτο»;",
+                "options": ["Βιετνάμ", "Ινδονησία", "Μεξικό", "Αρμενία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"burrito\" come from?",
+                "options": ["Vietnam", "Indonesia", "Mexico", "Armenia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q500724",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Πίτσα Μαργαρίτα»;",
+                "options": ["Αίγυπτος", "Ιταλία", "Τουρκία", "Ιράν"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Pizza Margherita\" come from?",
+                "options": ["Egypt", "Italy", "Turkey", "Iran"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q575790",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Λάνγκος»;",
+                "options": ["Συρία", "Ρωσία", "Πολωνία", "Ουγγαρία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"lángos\" come from?",
+                "options": ["Syria", "Russia", "Poland", "Hungary"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q598222",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Μπίγκος»;",
+                "options": ["Πολωνία", "Τουρκία", "Γερμανία", "Αρμενία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"bigos\" come from?",
+                "options": ["Poland", "Turkey", "Germany", "Armenia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q681770",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Λουκάνικο Φρανκφούρτης»;",
+                "options": ["Πολωνία", "Γαλλία", "Γερμανία", "Αρμενία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Frankfurter Würstchen\" come from?",
+                "options": ["Poland", "France", "Germany", "Armenia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q713869",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Ζελέ γρασιδιού»;",
+                "options": [
+                    "Κροατία",
+                    "Λαϊκή Δημοκρατία της Κίνας",
+                    "Ιράν",
+                    "Ελλάδα"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"grass jelly\" come from?",
+                "options": [
+                    "Croatia",
+                    "People's Republic of China",
+                    "Iran",
+                    "Greece"
+                ]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q828043",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «μπουγιαμπέσα»;",
+                "options": ["Ιαπωνία", "Ινδία", "Ελλάδα", "Γαλλία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"bouillabaisse\" come from?",
+                "options": ["Japan", "India", "Greece", "France"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q863794",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Τσίλι κον κάρνε»;",
+                "options": ["Μεξικό", "Γερμανία", "Ουγγαρία", "Ινδία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"chili\" come from?",
+                "options": ["Mexico", "Germany", "Hungary", "India"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q865325",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κεσαντίγια»;",
+                "options": ["Τουρκία", "Μεξικό", "Κροατία", "Πολωνία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"quesadilla\" come from?",
+                "options": ["Turkey", "Mexico", "Croatia", "Poland"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q867426",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «τσέντολ»;",
+                "options": ["Ιταλία", "Τουρκία", "Συρία", "Ινδονησία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Cendol\" come from?",
+                "options": ["Italy", "Turkey", "Syria", "Indonesia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q876096",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Εντσιλάδα»;",
+                "options": ["Μεξικό", "Ινδία", "Αρμενία", "Αίγυπτος"]
+            },
+            "en": {
+                "text": "Which country does the dish \"enchilada\" come from?",
+                "options": ["Mexico", "India", "Armenia", "Egypt"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q893318",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Μπουρανί»;",
+                "options": [
+                    "Λαϊκή Δημοκρατία της Κίνας",
+                    "Ιαπωνία",
+                    "Αίγυπτος",
+                    "Ιράν"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"Borani\" come from?",
+                "options": [
+                    "People's Republic of China",
+                    "Japan",
+                    "Egypt",
+                    "Iran"
+                ]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q905527",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «τακογιάκι»;",
+                "options": ["Γαλλία", "Πακιστάν", "Αίγυπτος", "Ιαπωνία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"takoyaki\" come from?",
+                "options": ["France", "Pakistan", "Egypt", "Japan"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q934095",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «λάξα»;",
+                "options": ["Πολωνία", "Ιράν", "Αίγυπτος", "Μεξικό"]
+            },
+            "en": {
+                "text": "Which country does the dish \"laksa\" come from?",
+                "options": ["Poland", "Iran", "Egypt", "Mexico"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q997633",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Σάλτσα Αματριτσιάνα»;",
+                "options": ["Βόρεια Κορέα", "Ιαπωνία", "Ουκρανία", "Ιταλία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"amatriciana sauce\" come from?",
+                "options": ["North Korea", "Japan", "Ukraine", "Italy"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1026488",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κάλντο Γκαλέγκο»;",
+                "options": ["Ελλάδα", "Ιταλία", "Ισπανία", "Βιετνάμ"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Caldo galego\" come from?",
+                "options": ["Greece", "Italy", "Spain", "Vietnam"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1048130",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Ορόμο»;",
+                "options": ["Κιργιζία", "Τουρκία", "Ιταλία", "Συρία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"oromo\" come from?",
+                "options": ["Kyrgyzstan", "Turkey", "Italy", "Syria"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1057256",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Οσομπούκο»;",
+                "options": ["Τουρκία", "Ιταλία", "Ουκρανία", "Κιργιζία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"ossobuco\" come from?",
+                "options": ["Turkey", "Italy", "Ukraine", "Kyrgyzstan"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1093380",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «κλαμπ σάντουιτς»;",
+                "options": [
+                    "Αίγυπτος",
+                    "Ελλάδα",
+                    "Ιράν",
+                    "Ηνωμένες Πολιτείες Αμερικής"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"club sandwich\" come from?",
+                "options": ["Egypt", "Greece", "Iran", "United States"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1197104",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κόσαρι»;",
+                "options": ["Αίγυπτος", "Ινδία", "Γαλλία", "Ουγγαρία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"koshari\" come from?",
+                "options": ["Egypt", "India", "France", "Hungary"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1244010",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Σαγανάκι»;",
+                "options": ["Πακιστάν", "Γαλλία", "Ινδία", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Saganaki\" come from?",
+                "options": ["Pakistan", "France", "India", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1284887",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κέικ Red velvet»;",
+                "options": [
+                    "Ρωσία",
+                    "Ηνωμένες Πολιτείες Αμερικής",
+                    "Συρία",
+                    "Ουκρανία"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"red velvet cake\" come from?",
+                "options": ["Russia", "United States", "Syria", "Ukraine"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1432724",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «σουτζούκι»;",
+                "options": ["Αρμενία", "Τουρκία", "Ινδονησία", "Ιαπωνία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"sujuk\" come from?",
+                "options": ["Armenia", "Turkey", "Indonesia", "Japan"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1473422",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Φουλ μενταμές»;",
+                "options": ["Κροατία", "Ισπανία", "Αίγυπτος", "Ουγγαρία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"ful medames\" come from?",
+                "options": ["Croatia", "Spain", "Egypt", "Hungary"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1520293",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Ρέντανγκ»;",
+                "options": ["Πακιστάν", "Ινδονησία", "Ελλάδα", "Ιράν"]
+            },
+            "en": {
+                "text": "Which country does the dish \"rendang\" come from?",
+                "options": ["Pakistan", "Indonesia", "Greece", "Iran"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1559248",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Ριμπολίτα»;",
+                "options": ["Πακιστάν", "Ινδονησία", "Ουγγαρία", "Ιταλία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"ribollita\" come from?",
+                "options": ["Pakistan", "Indonesia", "Hungary", "Italy"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1726195",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «σιρνίκι»;",
+                "options": ["Ρωσία", "Αρμενία", "Τουρκία", "Ουκρανία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Syrniki\" come from?",
+                "options": ["Russia", "Armenia", "Turkey", "Ukraine"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1753265",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Σκορδαλιά»;",
+                "options": ["Συρία", "Ελλάδα", "Ινδία", "Ιράν"]
+            },
+            "en": {
+                "text": "Which country does the dish \"skordalia\" come from?",
+                "options": ["Syria", "Greece", "India", "Iran"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q1760470",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Τραμετζίνο»;",
+                "options": ["Πολωνία", "Ουγγαρία", "Ιταλία", "Γερμανία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Tramezzino\" come from?",
+                "options": ["Poland", "Hungary", "Italy", "Germany"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q2056399",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Παστουρμάς»;",
+                "options": ["Γαλλία", "Βιετνάμ", "Τουρκία", "Ισπανία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"pastırma\" come from?",
+                "options": ["France", "Vietnam", "Turkey", "Spain"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q2082064",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «κονσομέ»;",
+                "options": [
+                    "Λαϊκή Δημοκρατία της Κίνας",
+                    "Γαλλία",
+                    "Μεξικό",
+                    "Πακιστάν"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"Consommé\" come from?",
+                "options": [
+                    "People's Republic of China",
+                    "France",
+                    "Mexico",
+                    "Pakistan"
+                ]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q2297499",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Σοφρίτο»;",
+                "options": ["Ιράν", "Ελλάδα", "Κροατία", "Ισπανία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Sofrito\" come from?",
+                "options": ["Iran", "Greece", "Croatia", "Spain"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q2317875",
+        "category": "food",
+        "difficulty": "easy",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Ρεβανί»;",
+                "options": [
+                    "Ελλάδα",
+                    "Ηνωμένες Πολιτείες Αμερικής",
+                    "Αίγυπτος",
+                    "Ιράν"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"basbousa\" come from?",
+                "options": ["Greece", "United States", "Egypt", "Iran"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q2402333",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Η απόλαυση του Βούδα»;",
+                "options": [
+                    "Πολωνία",
+                    "Συρία",
+                    "Λαϊκή Δημοκρατία της Κίνας",
+                    "Μεξικό"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"Buddha's delight\" come from?",
+                "options": [
+                    "Poland",
+                    "Syria",
+                    "People's Republic of China",
+                    "Mexico"
+                ]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q2548949",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «ντολμάς»;",
+                "options": ["Αίγυπτος", "Τουρκία", "Αρμενία", "Βόρεια Κορέα"]
+            },
+            "en": {
+                "text": "Which country does the dish \"vine leaf roll\" come from?",
+                "options": ["Egypt", "Turkey", "Armenia", "North Korea"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q2955932",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «τσαμπουράντο»;",
+                "options": ["Τουρκία", "Μεξικό", "Ουκρανία", "Ισπανία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Champurrado\" come from?",
+                "options": ["Turkey", "Mexico", "Ukraine", "Spain"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q3082973",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Μεσκλάν»;",
+                "options": [
+                    "Ηνωμένες Πολιτείες Αμερικής",
+                    "Γαλλία",
+                    "Ουκρανία",
+                    "Ελλάδα"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"Mesclun\" come from?",
+                "options": ["United States", "France", "Ukraine", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q3104777",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Γκαπαμά»;",
+                "options": ["Ελλάδα", "Αρμενία", "Γερμανία", "Ιαπωνία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Ghapama\" come from?",
+                "options": ["Greece", "Armenia", "Germany", "Japan"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q3391647",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κλαπερτάαρτ»;",
+                "options": ["Ινδονησία", "Αίγυπτος", "Πολωνία", "Ιαπωνία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"klappertaart\" come from?",
+                "options": ["Indonesia", "Egypt", "Poland", "Japan"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q3629971",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Παβ μπατζί»;",
+                "options": ["Ινδία", "Ιράν", "Πακιστάν", "Ουκρανία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Pav bhaji\" come from?",
+                "options": ["India", "Iran", "Pakistan", "Ukraine"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q3848253",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «στρογκανίνα»;",
+                "options": ["Ρωσία", "Βιετνάμ", "Βόρεια Κορέα", "Ουγγαρία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"stroganina\" come from?",
+                "options": ["Russia", "Vietnam", "North Korea", "Hungary"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q4205452",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «νάσι κεμπούλι»;",
+                "options": ["Ισπανία", "Ινδία", "Ρωσία", "Ινδονησία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"nasi kebuli\" come from?",
+                "options": ["Spain", "India", "Russia", "Indonesia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q4822464",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Νοκούλ»;",
+                "options": ["Τουρκία", "Ελλάδα", "Κροατία", "Αίγυπτος"]
+            },
+            "en": {
+                "text": "Which country does the dish \"nokul\" come from?",
+                "options": ["Turkey", "Greece", "Croatia", "Egypt"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q5016033",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κάτσιο ε πέπε»;",
+                "options": [
+                    "Ιταλία",
+                    "Αρμενία",
+                    "Ηνωμένες Πολιτείες Αμερικής",
+                    "Ουκρανία"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"cacio e pepe\" come from?",
+                "options": ["Italy", "Armenia", "United States", "Ukraine"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q5261363",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Πετσέλ»;",
+                "options": ["Ινδονησία", "Βιετνάμ", "Ουκρανία", "Ουγγαρία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"pecel\" come from?",
+                "options": ["Indonesia", "Vietnam", "Ukraine", "Hungary"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q5296979",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Ντουντπάκ»;",
+                "options": ["Κιργιζία", "Τουρκία", "Βιετνάμ", "Ινδία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Doodhpak\" come from?",
+                "options": ["Kyrgyzstan", "Turkey", "Vietnam", "India"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q5864774",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «ταχτσίν»;",
+                "options": ["Γαλλία", "Βόρεια Κορέα", "Ιράν", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Tah Chin\" come from?",
+                "options": ["France", "North Korea", "Iran", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q6027429",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Χουνκιάρ μπεγιεντί»;",
+                "options": ["Αίγυπτος", "Συρία", "Πολωνία", "Τουρκία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"hünkârbeğendi\" come from?",
+                "options": ["Egypt", "Syria", "Poland", "Turkey"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q6434112",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «κότλετ σχαμπόβι»;",
+                "options": [
+                    "Λαϊκή Δημοκρατία της Κίνας",
+                    "Τουρκία",
+                    "Πολωνία",
+                    "Ελλάδα"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"kotlet schabowy\" come from?",
+                "options": [
+                    "People's Republic of China",
+                    "Turkey",
+                    "Poland",
+                    "Greece"
+                ]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q7446149",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Σέγκα τζαμπλάνγκ»;",
+                "options": ["Ιράν", "Πολωνία", "Ιαπωνία", "Ινδονησία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Rice Jamblang\" come from?",
+                "options": ["Iran", "Poland", "Japan", "Indonesia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q7522199",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Σινδικό μπιριάνι»;",
+                "options": ["Ελλάδα", "Συρία", "Πακιστάν", "Ρωσία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Sindhi biryani\" come from?",
+                "options": ["Greece", "Syria", "Pakistan", "Russia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q7573059",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Σπανακόρυζο»;",
+                "options": ["Πολωνία", "Γερμανία", "Μεξικό", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Spanakorizo\" come from?",
+                "options": ["Poland", "Germany", "Mexico", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q7809258",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Τυροκαυτερή»;",
+                "options": ["Ελλάδα", "Ιταλία", "Αρμενία", "Ινδία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"tirokafteri\" come from?",
+                "options": ["Greece", "Italy", "Armenia", "India"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q8077757",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Τσομπάν σαλατασί»;",
+                "options": ["Τουρκία", "Ελλάδα", "Ισπανία", "Ινδονησία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"çoban salad\" come from?",
+                "options": ["Turkey", "Greece", "Spain", "Indonesia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q11343150",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Μουχαλεμπί»;",
+                "options": ["Αίγυπτος", "Ισπανία", "Ιράν", "Πολωνία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"mehallabiyya\" come from?",
+                "options": ["Egypt", "Spain", "Iran", "Poland"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q12208569",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Χαλαουέτ ελ-τζιμπν»;",
+                "options": ["Συρία", "Ιράν", "Ινδονησία", "Κιργιζία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Halawet el Jibn\" come from?",
+                "options": ["Syria", "Iran", "Indonesia", "Kyrgyzstan"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q12884882",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 3,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Στραπατσάδα»;",
+                "options": ["Βόρεια Κορέα", "Πολωνία", "Ιράν", "Ελλάδα"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Strapatsada\" come from?",
+                "options": ["North Korea", "Poland", "Iran", "Greece"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q16706914",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Μεττ»;",
+                "options": ["Συρία", "Γερμανία", "Ελλάδα", "Ινδονησία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Mett\" come from?",
+                "options": ["Syria", "Germany", "Greece", "Indonesia"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q16937065",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κασκ ε μπαντεμτζάν»;",
+                "options": ["Ινδία", "Ιταλία", "Ιράν", "Ιαπωνία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Kashk e badamjan\" come from?",
+                "options": ["India", "Italy", "Iran", "Japan"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q17485383",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Σοπάρνικ»;",
+                "options": ["Κροατία", "Ρωσία", "Ιράν", "Πολωνία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Soparnik\" come from?",
+                "options": ["Croatia", "Russia", "Iran", "Poland"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q19728050",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κούε άπε»;",
+                "options": [
+                    "Ηνωμένες Πολιτείες Αμερικής",
+                    "Ινδονησία",
+                    "Ρωσία",
+                    "Μεξικό"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"kue ape\" come from?",
+                "options": ["United States", "Indonesia", "Russia", "Mexico"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q44506308",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 2,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Ίντζο-γκόγκι-μπαπ»;",
+                "options": ["Ιταλία", "Ιαπωνία", "Βόρεια Κορέα", "Πολωνία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"injo-gogi-bap\" come from?",
+                "options": ["Italy", "Japan", "North Korea", "Poland"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q48880901",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Μπαν ντάου σαν»;",
+                "options": [
+                    "Βιετνάμ",
+                    "Πακιστάν",
+                    "Ουγγαρία",
+                    "Λαϊκή Δημοκρατία της Κίνας"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"bánh đậu xanh\" come from?",
+                "options": [
+                    "Vietnam",
+                    "Pakistan",
+                    "Hungary",
+                    "People's Republic of China"
+                ]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q111046463",
+        "category": "food",
+        "difficulty": "medium",
+        "correct": 1,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «Κρακοβιανό ομπβαζάνεκ»;",
+                "options": ["Βόρεια Κορέα", "Πολωνία", "Ελλάδα", "Συρία"]
+            },
+            "en": {
+                "text": "Which country does the dish \"Obwarzanek krakowski\" come from?",
+                "options": ["North Korea", "Poland", "Greece", "Syria"]
+            }
+        }
+    },
+    {
+        "ref": "dish-origin:Q125582095",
+        "category": "food",
+        "difficulty": "hard",
+        "correct": 0,
+        "source": "wikidata",
+        "license": "CC0 (Wikidata)",
+        "status": "published",
+        "translations": {
+            "el": {
+                "text": "Από ποια χώρα προέρχεται το πιάτο «ψάρι πλακί»;",
+                "options": [
+                    "Ελλάδα",
+                    "Ηνωμένες Πολιτείες Αμερικής",
+                    "Αρμενία",
+                    "Συρία"
+                ]
+            },
+            "en": {
+                "text": "Which country does the dish \"psari plaki\" come from?",
+                "options": ["Greece", "United States", "Armenia", "Syria"]
+            }
+        }
+    }
+]

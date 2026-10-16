@@ -14,11 +14,26 @@ declare module 'vite/client' {
     }
 }
 
+declare global {
+    interface Window {
+        /** Where to reach the websocket server (rendered by app.blade.php). */
+        quizlyReverb: {
+            key: string;
+            /** Null: the page's own host. */
+            host: string | null;
+            port: number;
+            scheme: 'http' | 'https';
+        };
+    }
+}
+
 declare module '@inertiajs/core' {
     export interface InertiaConfig {
         sharedPageProps: {
             name: string;
             auth: Auth;
+            locale: string;
+            translations: Record<string, string>;
             sidebarOpen: boolean;
             [key: string]: unknown;
         };

@@ -42,6 +42,15 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        // Guests without accounts, identified by cookies (see App\Support\GuestCookies).
+        'host' => [
+            'driver' => 'host-cookie',
+        ],
+
+        'player' => [
+            'driver' => 'player-cookie',
+        ],
     ],
 
     /*
