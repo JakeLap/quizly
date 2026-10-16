@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Form, Head, Link } from '@inertiajs/vue3';
 import { Smartphone, Tv } from '@lucide/vue';
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 import GameBackground from '@/components/room/GameBackground.vue';
 import { useTrans } from '@/composables/useTrans';
 import { dashboard, login } from '@/routes';
@@ -14,6 +15,10 @@ const { t } = useTrans();
     <Head :title="t('Trivia party game')" />
 
     <GameBackground>
+        <div class="absolute top-4 right-4 z-10">
+            <LanguageSwitcher />
+        </div>
+
         <main
             class="mx-auto flex min-h-dvh max-w-4xl flex-col items-center justify-center gap-12 px-4 py-12 text-center"
         >

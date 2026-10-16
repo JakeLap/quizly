@@ -40,9 +40,11 @@ class StartGame
                 ]);
             }
 
+            // Questions asked in the room's earlier games aren't asked again.
             $available = Question::query()
                 ->playableIn($game->locale)
                 ->whereIn('category_id', $game->categories()->select('categories.id'))
+                ->whereNotIn('id', $game->rounds()->select('question_id'))
                 ->count();
 
             if ($available < $game->settings->rounds) {

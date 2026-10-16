@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 import GameBackground from '@/components/room/GameBackground.vue';
 import { useTrans } from '@/composables/useTrans';
 import { store } from '@/routes/play';
@@ -18,6 +19,10 @@ function toCode(event: Event) {
     <Head :title="t('Join a game')" />
 
     <GameBackground>
+        <div class="absolute top-4 right-4 z-10">
+            <LanguageSwitcher />
+        </div>
+
         <main
             class="mx-auto flex min-h-dvh max-w-sm flex-col justify-center gap-8 px-4 py-10"
         >

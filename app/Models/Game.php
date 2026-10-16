@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property GameStatus $status
  * @property GameSettings $settings
  * @property int $current_round
+ * @property int $match_number Which game this is in the room; "play again" starts the next one.
  * @property int $state_version Incremented on every state change, so clients can ignore outdated updates.
  * @property CarbonImmutable|null $next_transition_at When the current phase ends and the game clock moves the game on. While paused: when the room closes unless the host returns.
  * @property CarbonImmutable|null $host_seen_at The host screen's last heartbeat.
@@ -50,6 +51,17 @@ class Game extends Model
 {
     /** @use HasFactory<GameFactory> */
     use HasFactory;
+
+    /**
+     * The database defaults, so a new model has them before it's reloaded.
+     *
+     * @var array<string, mixed>
+     */
+    protected $attributes = [
+        'current_round' => 0,
+        'match_number' => 1,
+        'state_version' => 0,
+    ];
 
     use MassPrunable;
 
@@ -121,11 +133,23 @@ class Game extends Model
     }
 
     /**
+     * Every round played in the room, over all its games.
+     *
      * @return HasMany<Round, $this>
      */
     public function rounds(): HasMany
     {
-        return $this->hasMany(Round::class)->orderBy('number');
+        return $this->hasMany(Round::class)->orderBy('match_number')->orderBy('number');
+    }
+
+    /**
+     * The rounds of the game being played now (the room's current match).
+     *
+     * @return HasMany<Round, $this>
+     */
+    public function matchRounds(): HasMany
+    {
+        return $this->hasMany(Round::class)->where('match_number', $this->match_number)->orderBy('number');
     }
 
     /**

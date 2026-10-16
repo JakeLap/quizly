@@ -77,6 +77,8 @@ export type RoomState = {
     status: RoomStatus;
     locale: string;
     version: number;
+    /** Which game this is in the room; round numbers restart in each. */
+    match: number;
     settings: RoomSettings;
     categories: RoomCategory[];
     players: RoomPlayer[];

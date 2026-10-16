@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Rooms;
 
 use App\Actions\Rooms\CloseRoom;
 use App\Actions\Rooms\CreateRoom;
+use App\Actions\Rooms\PlayAgain;
 use App\Actions\Rooms\RecordHostHeartbeat;
 use App\Actions\Rooms\RemoveDisconnectedPlayers;
 use App\Actions\Rooms\RemovePlayer;
@@ -12,15 +13,15 @@ use App\Actions\Rooms\UpdateRoomSettings;
 use App\Game\GameEngine;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Rooms\UpdateRoomSettingsRequest;
-use App\Models\Category;
 use App\Models\Game;
 use App\Models\Player;
 use App\Support\GuestCookies;
-use App\Support\QuizlyConfig;
 use App\Support\RoomState;
+use App\Support\SettingsOptions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Support\Facades\Cookie;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -33,22 +34,23 @@ class HostRoomController extends Controller
         return to_route('host.rooms.show', $room)->withCookie(GuestCookies::host($token));
     }
 
-    public function show(Game $room, RecordHostHeartbeat $heartbeat): Response
+    public function show(Request $request, Game $room, RecordHostHeartbeat $heartbeat): Response
     {
         // Opening the page counts as the screen being back.
         $heartbeat->handle($room);
         $room->refresh();
 
+        // An evening of games can outlast the cookie: renew it on every visit.
+        $token = $request->cookie(GuestCookies::HOST);
+
+        if (is_string($token)) {
+            Cookie::queue(GuestCookies::host($token));
+        }
+
         return Inertia::render('host/Room', [
             'room' => RoomState::of($room),
-            'categoryOptions' => $this->categoryOptions(),
+            ...SettingsOptions::all(),
             'joinUrl' => route('play.show', $room->code),
-            'limits' => [
-                'rounds' => config('quizly.rounds'),
-                'secondsPerRound' => config('quizly.seconds_per_round'),
-                'players' => config('quizly.players'),
-            ],
-            'locales' => QuizlyConfig::locales(),
             'disconnectGraceSeconds' => config('quizly.lobby_disconnect_grace_seconds'),
             'heartbeatSeconds' => config('quizly.host.heartbeat_seconds'),
         ]);
@@ -114,45 +116,20 @@ class HostRoomController extends Controller
         return back();
     }
 
+    /**
+     * Back to the lobby with the same players, for another game.
+     */
+    public function playAgain(Game $room, PlayAgain $playAgain): RedirectResponse
+    {
+        $playAgain->handle($room);
+
+        return back();
+    }
+
     public function close(Game $room, CloseRoom $closeRoom): RedirectResponse
     {
         $closeRoom->handle($room);
 
         return to_route('home');
-    }
-
-    /**
-     * Every active category, with its names and how many questions it has per language.
-     *
-     * @return array<int, array<string, mixed>>
-     */
-    private function categoryOptions(): array
-    {
-        $locales = QuizlyConfig::locales();
-
-        $counts = collect($locales)->mapWithKeys(fn (string $locale) => [
-            "questions as questions_{$locale}" => fn ($query) => $query->playableIn($locale),
-        ])->all();
-
-        return Category::query()
-            ->active()
-            ->ordered()
-            ->with('translations')
-            ->withCount($counts)
-            ->get()
-            ->map(fn (Category $category) => [
-                'id' => $category->id,
-                'slug' => $category->slug,
-                'icon' => $category->icon,
-                'color' => $category->color,
-                'names' => collect($locales)->mapWithKeys(fn (string $locale) => [
-                    $locale => $category->translation($locale)->name ?? $category->slug,
-                ])->all(),
-                'questionCounts' => collect($locales)->mapWithKeys(fn (string $locale) => [
-                    $locale => (int) $category->getAttribute("questions_{$locale}"),
-                ])->all(),
-            ])
-            ->values()
-            ->all();
     }
 }

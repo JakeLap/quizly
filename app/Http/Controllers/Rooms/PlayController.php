@@ -4,18 +4,23 @@ namespace App\Http\Controllers\Rooms;
 
 use App\Actions\Game\SubmitAnswer;
 use App\Actions\Rooms\JoinRoom;
+use App\Actions\Rooms\PlayAgain;
 use App\Actions\Rooms\RemovePlayer;
 use App\Actions\Rooms\StartGame;
+use App\Actions\Rooms\UpdateRoomSettings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\SubmitAnswerRequest;
 use App\Http\Requests\Rooms\JoinRoomRequest;
+use App\Http\Requests\Rooms\UpdateRoomSettingsRequest;
 use App\Models\Game;
 use App\Models\Player;
 use App\Support\GuestCookies;
 use App\Support\RoomCode;
 use App\Support\RoomState;
+use App\Support\SettingsOptions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -51,12 +56,21 @@ class PlayController extends Controller
         $player = $this->currentPlayer();
 
         if ($room && $player?->game_id === $room->id) {
+            // Keep the player's cookie alive for as long as they keep playing.
+            $token = request()->cookie(GuestCookies::PLAYER);
+
+            if (is_string($token)) {
+                Cookie::queue(GuestCookies::player($token));
+            }
+
             return Inertia::render('play/Room', [
                 'room' => RoomState::of($room),
                 'me' => RoomState::player($player),
                 'myAnswer' => $this->myAnswer($room, $player),
                 'kicked' => ! $player->isParticipating(),
                 'minPlayers' => config('quizly.players.min'),
+                // Only the VIP can change the settings, so only they need the options.
+                'settingsOptions' => fn () => $player->is_vip ? SettingsOptions::all() : null,
             ]);
         }
 
@@ -97,6 +111,30 @@ class PlayController extends Controller
     }
 
     /**
+     * The VIP can also take a finished room back to the lobby from their phone.
+     */
+    public function playAgain(Game $room, PlayAgain $playAgain): RedirectResponse
+    {
+        abort_unless($this->currentPlayer()?->is_vip, 403);
+
+        $playAgain->handle($room);
+
+        return back();
+    }
+
+    /**
+     * The VIP can set up the game from their phone too: easier than on the TV.
+     */
+    public function update(UpdateRoomSettingsRequest $request, Game $room, UpdateRoomSettings $updateSettings): RedirectResponse
+    {
+        abort_unless($this->currentPlayer()?->is_vip, 403);
+
+        $updateSettings->handle($room, $request->settings(), $request->validated('locale'), $request->categoryIds());
+
+        return back();
+    }
+
+    /**
      * The VIP (the first player to join) can start the game from their phone.
      */
     public function start(Game $room, StartGame $startGame): RedirectResponse
@@ -127,18 +165,18 @@ class PlayController extends Controller
      * Which button the player pressed in the current round, so it stays
      * highlighted if they reload the page.
      *
-     * @return array{round: int, slot: int}|null
+     * @return array{match: int, round: int, slot: int}|null
      */
     private function myAnswer(Game $room, Player $player): ?array
     {
-        $round = $room->rounds()->where('number', $room->current_round)->first();
+        $round = $room->matchRounds()->where('number', $room->current_round)->first();
         $answer = $round?->answers()->where('player_id', $player->id)->first();
 
         if (! $round || ! $answer) {
             return null;
         }
 
-        return ['round' => $round->number, 'slot' => (int) array_search($answer->option_index, $round->option_order, true)];
+        return ['match' => $room->match_number, 'round' => $round->number, 'slot' => (int) array_search($answer->option_index, $round->option_order, true)];
     }
 
     private function currentPlayer(): ?Player

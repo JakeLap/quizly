@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property int $id
  * @property int $game_id
+ * @property int $match_number
  * @property int $number
  * @property int $question_id
  * @property int $category_id
@@ -34,7 +35,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Category $category
  * @property-read Collection<int, Answer> $answers
  */
-#[Fillable(['number', 'question_id', 'category_id', 'option_order', 'status', 'shown_at', 'opens_at', 'ends_at', 'closed_at'])]
+#[Fillable(['match_number', 'number', 'question_id', 'category_id', 'option_order', 'status', 'shown_at', 'opens_at', 'ends_at', 'closed_at'])]
 #[DateFormat('Y-m-d H:i:s.v')]
 class Round extends Model
 {

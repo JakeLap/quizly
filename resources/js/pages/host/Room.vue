@@ -16,21 +16,25 @@ import HostQuestion from '@/components/game/HostQuestion.vue';
 import HostScoreboard from '@/components/game/HostScoreboard.vue';
 import SwapTransition from '@/components/game/SwapTransition.vue';
 import GameBackground from '@/components/room/GameBackground.vue';
-import HostSettings from '@/components/room/HostSettings.vue';
 import JoinQrCode from '@/components/room/JoinQrCode.vue';
 import PlayerCard from '@/components/room/PlayerCard.vue';
+import RoomSettings from '@/components/room/RoomSettings.vue';
+import SoundHint from '@/components/room/SoundHint.vue';
+import { useHostSounds } from '@/composables/useGameSounds';
 import { useRoom } from '@/composables/useRoom';
 import { useTrans } from '@/composables/useTrans';
 import { useWakeLock } from '@/composables/useWakeLock';
-import { postJson } from '@/lib/http';
+import { postJson, stayInRoom } from '@/lib/http';
 import {
     close,
     heartbeat as heartbeatRoute,
     kick,
     next,
+    playAgain as playAgainRoute,
     presence,
     start,
     store as createRoom,
+    update,
 } from '@/routes/host/rooms';
 import type {
     CategoryOption,
@@ -63,12 +67,15 @@ const { room, now, isOnline, connection, presenceReady } = useRoom(
 );
 
 useWakeLock();
+useHostSounds(room, now);
 
 // Tell the server the screen is still here. If the heartbeats stop, the
 // server pauses the game (players can't see the questions without the
 // screen) and closes the room if the screen doesn't come back in time.
+// Keep going on the results too: a player can start another game from
+// there, and a stale heartbeat would pause it the moment it starts.
 function heartbeat() {
-    if (!['finished', 'abandoned'].includes(room.value.status)) {
+    if (room.value.status !== 'abandoned') {
         void postJson(heartbeatRoute.url(room.value.code));
     }
 }
@@ -178,11 +185,19 @@ const startError = computed(
 );
 
 function startGame() {
-    router.post(start.url(room.value.code), {}, { preserveScroll: true });
+    router.post(start.url(room.value.code), {}, stayInRoom);
+}
+
+const playAgainError = computed(
+    () => (page.props.errors as Record<string, string>).room,
+);
+
+function playAgain() {
+    router.post(playAgainRoute.url(room.value.code), {}, stayInRoom);
 }
 
 function skip() {
-    router.post(next.url(room.value.code), {}, { preserveScroll: true });
+    router.post(next.url(room.value.code), {}, stayInRoom);
 }
 
 function removePlayer(player: RoomPlayer) {
@@ -190,7 +205,7 @@ function removePlayer(player: RoomPlayer) {
         router.post(
             kick.url({ room: room.value.code, player: player.id }),
             {},
-            { preserveScroll: true },
+            stayInRoom,
         );
     }
 }
@@ -290,11 +305,12 @@ function closeRoom() {
                 >
                     <h2 class="text-xl font-bold">{{ t('Game settings') }}</h2>
 
-                    <HostSettings
+                    <RoomSettings
                         :room="room"
                         :category-options="categoryOptions"
                         :limits="limits"
                         :locales="locales"
+                        :action="update.url(room.code)"
                     />
 
                     <div class="grid gap-2 border-t border-white/15 pt-6">
@@ -387,6 +403,15 @@ function closeRoom() {
                         room.status === 'abandoned'
                     "
                 >
+                    <!-- Same room, same players: back to the lobby for another game. -->
+                    <button
+                        v-if="room.status === 'finished'"
+                        type="button"
+                        class="flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 font-bold text-indigo-950 shadow-lg hover:bg-amber-300"
+                        @click="playAgain"
+                    >
+                        <RotateCcw class="size-4" /> {{ t('Play again') }}
+                    </button>
                     <!-- A new room needs a fresh page, not this one's state. -->
                     <Form
                         v-bind="createRoom.form()"
@@ -394,11 +419,26 @@ function closeRoom() {
                     >
                         <button
                             type="submit"
-                            class="flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 font-bold text-indigo-950 shadow-lg hover:bg-amber-300"
+                            :class="
+                                room.status === 'finished'
+                                    ? 'rounded-full bg-white/10 px-4 py-2.5 font-semibold ring-1 ring-white/20 hover:bg-white/20'
+                                    : 'flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 font-bold text-indigo-950 shadow-lg hover:bg-amber-300'
+                            "
                         >
-                            <RotateCcw class="size-4" /> {{ t('New game') }}
+                            <RotateCcw class="size-4" />
+                            {{
+                                room.status === 'finished'
+                                    ? t('New room')
+                                    : t('New game')
+                            }}
                         </button>
                     </Form>
+                    <p
+                        v-if="playAgainError"
+                        class="max-w-xs text-right text-rose-300"
+                    >
+                        {{ playAgainError }}
+                    </p>
                 </template>
                 <template v-else>
                     <button
@@ -418,5 +458,6 @@ function closeRoom() {
                 </template>
             </div>
         </template>
+        <SoundHint />
     </GameBackground>
 </template>

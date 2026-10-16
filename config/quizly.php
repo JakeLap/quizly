@@ -119,4 +119,20 @@ return [
 
     'options_per_question' => 4,
 
+    // Where the question seeder reads its JSON files from.
+    'question_files' => database_path('data/questions'),
+
+    'wikidata' => [
+        // Wikidata asks clients to identify themselves.
+        'user_agent' => env('QUIZLY_WIKIDATA_USER_AGENT', 'Quizly/1.0 (trivia question generator)'),
+
+        // Questions left out because Wikidata's own data is wrong (template:item).
+        // Better still, correct the item on wikidata.org and remove it here.
+        'exclude' => [
+            'nobel-peace-year:Q1065', // the UN won in 2001; Wikidata says 2002
+            // Olympic Games cancelled by the World Wars: nobody hosted them.
+            'olympics-host:Q8123', 'olympics-host:Q8368', 'olympics-host:Q8376', 'olympics-host:Q9607', 'olympics-host:Q9613',
+        ],
+    ],
+
 ];

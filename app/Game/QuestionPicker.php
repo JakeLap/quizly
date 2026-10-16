@@ -8,7 +8,8 @@ use App\Models\Question;
 class QuestionPicker
 {
     /**
-     * A question for the game's next round, never one it has already asked.
+     * A question for the next round, never one already asked in this room
+     * (including in its earlier games).
      *
      * A random category is drawn first and then a random question in it, so
      * a category with many questions doesn't crowd out the others.

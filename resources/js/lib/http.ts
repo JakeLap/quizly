@@ -18,3 +18,14 @@ export function postJson(url: string, body: unknown = {}): Promise<Response> {
         body: JSON.stringify(body),
     });
 }
+
+/**
+ * Visit options for actions inside a room (start, skip, play again…): keep
+ * the page instead of rebuilding it. Rebuilding the page briefly leaves the
+ * room's live channel, so everyone else would see this screen or phone
+ * disconnect and come back.
+ */
+export const stayInRoom = {
+    preserveScroll: true,
+    preserveState: true,
+} as const;

@@ -44,11 +44,15 @@ class CreateRoom
         return [$game, $token];
     }
 
+    /**
+     * A code no room is using, nor a recently finished one (its players may
+     * still play again in it).
+     */
     private function freeCode(): string
     {
         do {
             $code = RoomCode::generate();
-        } while (Game::query()->active()->where('code', $code)->exists());
+        } while (Game::findByCode($code) !== null);
 
         return $code;
     }

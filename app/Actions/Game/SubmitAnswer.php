@@ -123,7 +123,7 @@ class SubmitAnswer
      */
     private function existingAnswer(Player $player, int $roundNumber, int $slot): Answer
     {
-        $round = Game::query()->findOrFail($player->game_id)->rounds()->where('number', $roundNumber)->first();
+        $round = Game::query()->findOrFail($player->game_id)->matchRounds()->where('number', $roundNumber)->first();
         $answer = $round?->answers()->where('player_id', $player->id)->first();
 
         if ($round === null || $answer === null || $answer->option_index !== $round->optionIndexForSlot($slot)) {

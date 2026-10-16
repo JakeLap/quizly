@@ -1,23 +1,56 @@
 <script setup lang="ts">
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
-import { Check, Crown, LogOut, Pause, Play, WifiOff, X } from '@lucide/vue';
-import { computed, ref } from 'vue';
+import {
+    Check,
+    ChevronDown,
+    Crown,
+    LogOut,
+    Pause,
+    Play,
+    RotateCcw,
+    Settings2,
+    WifiOff,
+    X,
+} from '@lucide/vue';
+import { computed, ref, watch } from 'vue';
 import SwapTransition from '@/components/game/SwapTransition.vue';
 import PlayerAnswerPad from '@/components/game/PlayerAnswerPad.vue';
 import GameBackground from '@/components/room/GameBackground.vue';
 import PlayerAvatar from '@/components/room/PlayerAvatar.vue';
+import RoomSettings from '@/components/room/RoomSettings.vue';
+import SoundToggle from '@/components/room/SoundToggle.vue';
+import { usePlayerSounds } from '@/composables/useGameSounds';
 import { useRoom } from '@/composables/useRoom';
 import { useTrans } from '@/composables/useTrans';
 import { useWakeLock } from '@/composables/useWakeLock';
-import { answer, create, leave, start } from '@/routes/play';
-import type { RoomPlayer, RoomState } from '@/types/room';
+import { stayInRoom } from '@/lib/http';
+import {
+    answer,
+    create,
+    leave,
+    playAgain as playAgainRoute,
+    start,
+    update as updateSettings,
+} from '@/routes/play';
+import type {
+    CategoryOption,
+    Range,
+    RoomPlayer,
+    RoomState,
+} from '@/types/room';
 
 const props = defineProps<{
     room: RoomState;
     me: RoomPlayer;
     kicked: boolean;
     minPlayers: number;
-    myAnswer: { round: number; slot: number } | null;
+    myAnswer: { match: number; round: number; slot: number } | null;
+    /** For the VIP, who can set up the game from here too. */
+    settingsOptions: {
+        categoryOptions: CategoryOption[];
+        limits: { rounds: Range; secondsPerRound: Range; players: Range };
+        locales: string[];
+    } | null;
 }>();
 
 const { t } = useTrans();
@@ -67,21 +100,51 @@ const startError = computed(
     () => (page.props.errors as Record<string, string>).start,
 );
 
+const showSettings = ref(false);
+
+const settingsSummary = computed(() =>
+    t('Rounds :rounds · :seconds s · Categories :count', {
+        rounds: room.value.settings.rounds,
+        seconds: room.value.settings.seconds_per_round,
+        count: room.value.categories.length,
+    }),
+);
+
+// Became the VIP (the previous one left): fetch what the settings need.
+watch(
+    () => myself.value?.isVip,
+    (isVip) => {
+        if (isVip && !props.settingsOptions) {
+            router.reload({ only: ['settingsOptions'] });
+        }
+    },
+);
+
 // The button pressed this round: known locally straight away, and from the
 // server after a reload.
-const pending = ref<{ round: number; slot: number } | null>(null);
+const pending = ref<{
+    match: number;
+    round: number;
+    slot: number;
+} | null>(null);
 
 const chosenSlot = computed(() => {
     const round = room.value.round?.number;
 
     for (const choice of [pending.value, props.myAnswer]) {
-        if (choice && choice.round === round) {
+        if (
+            choice &&
+            choice.match === room.value.match &&
+            choice.round === round
+        ) {
             return choice.slot;
         }
     }
 
     return null;
 });
+
+usePlayerSounds(room, now, props.me.id, chosenSlot);
 
 const answerError = computed(
     () =>
@@ -96,7 +159,7 @@ function submitAnswer(slot: number) {
         return;
     }
 
-    pending.value = { round, slot };
+    pending.value = { match: room.value.match, round, slot };
     networkError.value = null;
     router.post(
         answer.url(room.value.code),
@@ -139,8 +202,16 @@ function playerColor(id: number) {
     return room.value.players.find((p) => p.id === id)?.color ?? '#6366f1';
 }
 
+const playAgainError = computed(
+    () => (page.props.errors as Record<string, string>).room,
+);
+
+function playAgain() {
+    router.post(playAgainRoute.url(room.value.code), {}, stayInRoom);
+}
+
 function startGame() {
-    router.post(start.url(room.value.code), {}, { preserveScroll: true });
+    router.post(start.url(room.value.code), {}, stayInRoom);
 }
 
 function leaveRoom() {
@@ -216,6 +287,7 @@ function leaveRoom() {
                     >
                         <Crown class="size-4" /> VIP
                     </span>
+                    <SoundToggle />
                 </header>
 
                 <!-- One phase at a time; paused first: the screen went away. -->
@@ -300,6 +372,47 @@ function leaveRoom() {
                                           ))
                                 }}
                             </p>
+                        </div>
+
+                        <div
+                            v-if="myself.isVip && settingsOptions"
+                            class="rounded-3xl bg-white/10 ring-1 ring-white/15"
+                        >
+                            <button
+                                type="button"
+                                class="flex w-full items-center gap-3 p-4 text-left"
+                                :aria-expanded="showSettings"
+                                @click="showSettings = !showSettings"
+                            >
+                                <Settings2
+                                    class="size-5 shrink-0 text-white/70"
+                                />
+                                <span class="min-w-0 flex-1">
+                                    <span class="block font-bold">{{
+                                        t('Game settings')
+                                    }}</span>
+                                    <span
+                                        class="block truncate text-sm text-white/70"
+                                        >{{ settingsSummary }}</span
+                                    >
+                                </span>
+                                <ChevronDown
+                                    class="size-5 shrink-0 transition-transform"
+                                    :class="{ 'rotate-180': showSettings }"
+                                />
+                            </button>
+                            <!-- Kept mounted, so a change still saves after closing. -->
+                            <div
+                                v-show="showSettings"
+                                class="border-t border-white/15 p-4"
+                            >
+                                <RoomSettings
+                                    :room="room"
+                                    v-bind="settingsOptions"
+                                    :action="updateSettings.url(room.code)"
+                                    narrow
+                                />
+                            </div>
                         </div>
 
                         <div class="grid gap-2">
@@ -467,13 +580,38 @@ function leaveRoom() {
                                 }}</span>
                             </li>
                         </ol>
-                        <Link
-                            v-if="room.status === 'finished'"
-                            :href="create()"
-                            class="mt-4 rounded-2xl bg-amber-400 px-6 py-3 text-lg font-black text-indigo-950"
-                        >
-                            {{ t('Join another game') }}
-                        </Link>
+                        <!-- The room stays open: the same players can play again. -->
+                        <template v-if="room.status === 'finished'">
+                            <button
+                                v-if="myself.isVip"
+                                type="button"
+                                class="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-amber-400 px-6 py-3 text-lg font-black text-indigo-950"
+                                @click="playAgain"
+                            >
+                                <RotateCcw class="size-5" />
+                                {{ t('Play again') }}
+                            </button>
+                            <p v-else class="mt-4 text-sm text-white/70">
+                                {{
+                                    t(
+                                        'Waiting for the host to start another game…',
+                                    )
+                                }}
+                            </p>
+                            <p
+                                v-if="playAgainError"
+                                class="text-sm text-rose-300"
+                            >
+                                {{ playAgainError }}
+                            </p>
+                            <button
+                                type="button"
+                                class="text-sm text-white/50 hover:text-white"
+                                @click="leaveRoom"
+                            >
+                                {{ t('Leave room') }}
+                            </button>
+                        </template>
                     </section>
                 </SwapTransition>
 

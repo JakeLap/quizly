@@ -1,7 +1,9 @@
 <?php
 
+use App\Data\GameSettings;
 use App\Enums\GameStatus;
 use App\Events\RoomUpdated;
+use App\Models\Category;
 use App\Models\Game;
 use App\Models\Player;
 use App\Models\Question;
@@ -165,6 +167,63 @@ test('the VIP can start the game from their phone', function () {
     $this->withCookie(GuestCookies::PLAYER, 'vip-token')->post(route('play.start', $room))->assertSessionHasNoErrors();
 
     expect($room->fresh()->status)->toBe(GameStatus::Intro);
+});
+
+test('the VIP can change the settings from their phone, other players cannot', function () {
+    $room = Game::factory()->create(['code' => 'ABCD', 'locale' => 'el']);
+    $categories = Category::factory()->count(2)->create();
+    Player::factory()->for($room)->vip()->withToken('vip-token')->create();
+    Player::factory()->for($room)->withToken('player-token')->create();
+    $settings = [
+        'rounds' => 5,
+        'seconds_per_round' => 30,
+        'max_players' => 4,
+        'locale' => 'en',
+        'categories' => $categories->pluck('id')->all(),
+    ];
+
+    $this->withCookie(GuestCookies::PLAYER, 'player-token')->patch(route('play.update', $room), $settings)->assertForbidden();
+    Auth::forgetGuards();
+    $this->withCookie(GuestCookies::PLAYER, 'vip-token')->patch(route('play.update', $room), $settings)->assertSessionHasNoErrors();
+
+    $room->refresh();
+    expect($room->settings)->toEqual(new GameSettings(5, 30, 4))
+        ->and($room->locale)->toBe('en')
+        ->and($room->categories->pluck('id')->sort()->values()->all())->toBe($categories->pluck('id')->sort()->values()->all());
+    Event::assertDispatched(RoomUpdated::class);
+});
+
+test('the VIP\'s settings are validated like the host\'s', function () {
+    $room = Game::factory()->create(['code' => 'ABCD']);
+    Player::factory()->for($room)->vip()->withToken('vip-token')->create();
+
+    $this->withCookie(GuestCookies::PLAYER, 'vip-token')
+        ->patch(route('play.update', $room), ['rounds' => 0, 'seconds_per_round' => 20, 'max_players' => 8, 'locale' => 'el', 'categories' => []])
+        ->assertSessionHasErrors(['rounds', 'categories']);
+
+    $room->status = GameStatus::Question;
+    $room->save();
+    Auth::forgetGuards();
+
+    $this->withCookie(GuestCookies::PLAYER, 'vip-token')
+        ->patch(route('play.update', $room), ['rounds' => 5, 'seconds_per_round' => 20, 'max_players' => 8, 'locale' => 'el', 'categories' => [Category::factory()->create()->id]])
+        ->assertSessionHasErrors('settings');
+});
+
+test('only the VIP gets the settings options on their phone', function () {
+    $room = Game::factory()->create(['code' => 'ABCD']);
+    Category::factory()->create();
+    Player::factory()->for($room)->vip()->withToken('vip-token')->create();
+    Player::factory()->for($room)->withToken('player-token')->create();
+
+    $this->withCookie(GuestCookies::PLAYER, 'vip-token')->get('/play/ABCD')
+        ->assertInertia(fn (Assert $page) => $page
+            ->has('settingsOptions.categoryOptions', 1)
+            ->has('settingsOptions.limits.rounds')
+            ->where('settingsOptions.locales', ['el', 'en']));
+    Auth::forgetGuards();
+    $this->withCookie(GuestCookies::PLAYER, 'player-token')->get('/play/ABCD')
+        ->assertInertia(fn (Assert $page) => $page->where('settingsOptions', null));
 });
 
 test('players cannot act in rooms they are not in', function () {

@@ -1,4 +1,4 @@
-import { createInertiaApp } from '@inertiajs/vue3';
+import { createInertiaApp, router } from '@inertiajs/vue3';
 import { initializeTheme } from '@/composables/useAppearance';
 import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
@@ -45,6 +45,12 @@ void createInertiaApp({
     progress: {
         color: '#fcd34d',
     },
+});
+
+// Keep <html lang> in step with the page's language after every visit,
+// including ones that stay on the same page (like switching language).
+router.on('success', (event) => {
+    document.documentElement.lang = String(event.detail.page.props.locale);
 });
 
 // This will set light / dark mode on page load...

@@ -24,6 +24,7 @@ use Illuminate\Validation\Rule;
  *       "correct": 0,
  *       "source": "manual",
  *       "license": null,
+ *       "status": "published",
  *       "translations": {
  *         "el": { "text": "…;", "options": ["…", "…", "…", "…"], "explanation": null },
  *         "en": { "text": "…?", "options": ["…", "…", "…", "…"] }
@@ -31,8 +32,10 @@ use Illuminate\Validation\Rule;
  *     }
  *
  * Items with a `ref` are matched on (source, ref), so importing the same file
- * again updates questions instead of duplicating them. The status is only set
- * for new questions, so a re-import never republishes a rejected question.
+ * again updates questions instead of duplicating them. The status (an item's
+ * own `status`, or the default passed to handle()) is set for new questions
+ * and for questions that are still drafts, so a re-import never republishes
+ * a question that was rejected.
  */
 class ImportQuestions
 {
@@ -70,6 +73,30 @@ class ImportQuestions
     }
 
     /**
+     * Check items without importing them (e.g. to test generated files).
+     *
+     * @param  iterable<int, mixed>  $items
+     */
+    public function validate(iterable $items): ImportResult
+    {
+        $result = new ImportResult;
+
+        foreach ($items as $index => $item) {
+            $validator = Validator::make(is_array($item) ? $item : [], $this->rules());
+
+            if ($validator->fails()) {
+                $result->failed[] = [
+                    'index' => $index,
+                    'ref' => is_array($item) && is_string($item['ref'] ?? null) ? $item['ref'] : null,
+                    'errors' => array_values($validator->errors()->all()),
+                ];
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @param  array<string, mixed>  $data
      * @return bool Whether a new question was created.
      */
@@ -94,8 +121,13 @@ class ImportQuestions
                 'license' => $data['license'] ?? null,
             ]);
 
+            // A question that is still an untouched draft follows its file (e.g.
+            // published there later); one that has been published or rejected
+            // in the app keeps that decision.
             if ($isNew) {
-                $question->status = $status;
+                $question->status = isset($data['status']) ? QuestionStatus::from($data['status']) : $status;
+            } elseif ($question->status === QuestionStatus::Draft && isset($data['status'])) {
+                $question->status = QuestionStatus::from($data['status']);
             }
 
             $question->save();
@@ -126,6 +158,7 @@ class ImportQuestions
             'correct' => ['required', 'integer', 'between:0,'.($optionCount - 1)],
             'source' => ['nullable', Rule::enum(QuestionSource::class)],
             'license' => ['nullable', 'string', 'max:255'],
+            'status' => ['nullable', Rule::in([QuestionStatus::Draft->value, QuestionStatus::Review->value, QuestionStatus::Published->value])],
             'translations.*' => ['array:text,options,explanation'],
             'translations.*.text' => ['required', 'string', 'max:500'],
             'translations.*.options' => ['required', 'array', "size:{$optionCount}"],

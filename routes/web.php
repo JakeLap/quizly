@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Rooms\HostRoomController;
 use App\Http\Controllers\Rooms\PlayController;
 use App\Http\Middleware\EnsureRoomHost;
@@ -8,6 +9,7 @@ use Illuminate\Broadcasting\BroadcastController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Welcome')->name('home');
+Route::post('locale', [LocaleController::class, 'update'])->name('locale.update');
 
 // The shared screen (TV) that runs a room. Authenticated by the host cookie, scoped to /host.
 Route::prefix('host')->name('host.')->group(function () {
@@ -19,6 +21,7 @@ Route::prefix('host')->name('host.')->group(function () {
         Route::patch('settings', 'update')->name('update');
         Route::post('start', 'start')->name('start');
         Route::post('next', 'next')->name('next');
+        Route::post('play-again', 'playAgain')->name('play-again');
         Route::post('presence', 'presenceChanged')->middleware('throttle:60,1')->name('presence');
         Route::post('heartbeat', 'heartbeat')->middleware('throttle:60,1')->name('heartbeat');
         Route::post('players/{player}/kick', 'kick')->scopeBindings()->name('kick');
@@ -35,8 +38,10 @@ Route::prefix('play')->name('play.')->group(function () {
 
     Route::middleware(EnsureRoomPlayer::class)->controller(PlayController::class)->prefix('{room}')->group(function () {
         Route::post('leave', 'leave')->name('leave');
+        Route::patch('settings', 'update')->name('update');
         Route::post('start', 'start')->name('start');
         Route::post('answer', 'answer')->name('answer');
+        Route::post('play-again', 'playAgain')->name('play-again');
     });
 });
 

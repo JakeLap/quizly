@@ -1,7 +1,7 @@
 import { router } from '@inertiajs/vue3';
 import { useConnectionStatus, useEchoPresence } from '@laravel/echo-vue';
 import { useEventListener, useIntervalFn } from '@vueuse/core';
-import { computed, ref, watch } from 'vue';
+import { computed, onScopeDispose, ref, watch } from 'vue';
 import type { RoomMember, RoomState } from '@/types/room';
 
 /** If nothing arrives for this long, check in with the server anyway. */
@@ -12,6 +12,9 @@ const OVERDUE_RESYNC_MS = 2_000;
 
 /** Never resync more often than this. */
 const MIN_RESYNC_GAP_MS = 3_000;
+
+/** How long someone can be gone (reloading, reconnecting) before they count as offline. */
+const LEAVE_GRACE_MS = 3_000;
 
 /**
  * Live room state: starts from the page props and follows the server's
@@ -73,6 +76,8 @@ export function useRoom(
     );
 
     const members = ref<RoomMember[]>([]);
+    /** Members who just left, by id: removed once the grace period runs out. */
+    const departures = new Map<string, number>();
     /** Whether the member list has arrived, so "offline" isn't shown while connecting. */
     const presenceReady = ref(false);
 
@@ -82,18 +87,39 @@ export function useRoom(
             presenceReady.value = true;
         })
         .joining((member: RoomMember) => {
+            window.clearTimeout(departures.get(member.id));
+            departures.delete(member.id);
+
             members.value = [
                 ...members.value.filter(({ id }) => id !== member.id),
                 member,
             ];
         })
         .leaving((member: RoomMember) => {
-            members.value = members.value.filter(({ id }) => id !== member.id);
+            // A page reload or a quick reconnect leaves and rejoins within a
+            // moment: only count the member as gone if they stay away.
+            window.clearTimeout(departures.get(member.id));
+            departures.set(
+                member.id,
+                window.setTimeout(() => {
+                    departures.delete(member.id);
+                    members.value = members.value.filter(
+                        ({ id }) => id !== member.id,
+                    );
 
-            if (member.role === 'player' && member.playerId !== undefined) {
-                onPlayerLeft?.(member.playerId);
-            }
+                    if (
+                        member.role === 'player' &&
+                        member.playerId !== undefined
+                    ) {
+                        onPlayerLeft?.(member.playerId);
+                    }
+                }, LEAVE_GRACE_MS),
+            );
         });
+
+    onScopeDispose(() =>
+        departures.forEach((timer) => window.clearTimeout(timer)),
+    );
 
     function resync() {
         lastResyncAt = Date.now();

@@ -279,7 +279,7 @@ test('players answer from their phones', function () {
 
     $this->withCookie(GuestCookies::PLAYER, 'player-1')
         ->get('/play/ABCD')
-        ->assertInertia(fn ($page) => $page->where('myAnswer', ['round' => 1, 'slot' => 2]));
+        ->assertInertia(fn ($page) => $page->where('myAnswer', ['match' => 1, 'round' => 1, 'slot' => 2]));
 });
 
 test('the final results stay viewable after the game', function () {

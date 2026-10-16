@@ -6,8 +6,10 @@ use App\Enums\QuestionSource;
 use App\Enums\QuestionStatus;
 use App\Models\Category;
 use App\Models\Question;
-use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\QuestionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
 
 uses(RefreshDatabase::class);
 
@@ -106,10 +108,52 @@ test('the import command rejects a missing file', function () {
     $this->artisan('quizly:import-questions', ['path' => '/nope.json'])->assertFailed();
 });
 
-test('the starter content is valid and playable in both languages', function () {
-    $this->seed(DatabaseSeeder::class);
+test('the seeder imports every question file', function () {
+    $directory = sys_get_temp_dir().'/quizly-questions-'.uniqid();
+    mkdir("{$directory}/wikidata", recursive: true);
+    file_put_contents("{$directory}/starter.json", json_encode([questionItem()]));
+    file_put_contents("{$directory}/wikidata/geography.json", json_encode([
+        questionItem(['ref' => 'geo-2', 'source' => 'wikidata', 'status' => 'draft']),
+    ]));
+    config(['quizly.question_files' => $directory]);
 
-    expect(Category::count())->toBe(11) // the seeder reuses the 'geography' slug from beforeEach
-        ->and(Question::query()->playableIn('el')->count())->toBe(45)
-        ->and(Question::query()->playableIn('en')->count())->toBe(45);
+    $this->seed(QuestionSeeder::class);
+    $this->seed(QuestionSeeder::class); // seeding again changes nothing
+
+    expect(Question::count())->toBe(2)
+        ->and(Question::where('source_ref', 'geo-1')->sole()->status)->toBe(QuestionStatus::Published)
+        ->and(Question::where('source_ref', 'geo-2')->sole()->status)->toBe(QuestionStatus::Draft);
+
+    File::deleteDirectory($directory);
+});
+
+test('an item can set its own status', function () {
+    app(ImportQuestions::class)->handle([questionItem(['status' => 'draft'])], QuestionStatus::Published);
+
+    expect(Question::sole()->status)->toBe(QuestionStatus::Draft);
+});
+
+test('items cannot import themselves as rejected', function () {
+    $result = app(ImportQuestions::class)->handle([questionItem(['status' => 'rejected'])]);
+
+    expect($result->failed)->toHaveCount(1);
+});
+
+test('every committed question file is valid and in both languages', function () {
+    $this->seed(CategorySeeder::class);
+    $import = app(ImportQuestions::class);
+    $refs = [];
+
+    foreach (File::allFiles(database_path('data/questions')) as $file) {
+        $items = json_decode((string) file_get_contents($file->getPathname()), true, flags: JSON_THROW_ON_ERROR);
+
+        expect($import->validate($items)->failed)->toBe([], $file->getRelativePathname());
+
+        foreach ($items as $item) {
+            expect(array_keys($item['translations']))->toEqualCanonicalizing(['el', 'en']);
+            $refs[] = ($item['source'] ?? 'manual').':'.$item['ref'];
+        }
+    }
+
+    expect($refs)->toHaveCount(count(array_unique($refs)));
 });

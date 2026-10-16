@@ -36,6 +36,8 @@ final class RoomState
             'status' => $game->status->value,
             'locale' => $game->locale,
             'version' => $game->state_version,
+            // Which game this is in the room (round numbers restart in each).
+            'match' => $game->match_number,
             'settings' => $game->settings->toArray(),
             'categories' => $game->categories
                 ->sortBy(fn (Category $category) => [$category->sort_order, $category->id])

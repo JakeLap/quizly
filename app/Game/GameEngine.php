@@ -327,7 +327,7 @@ class GameEngine
             return null;
         }
 
-        return $game->rounds()
+        return $game->matchRounds()
             ->where('number', $game->current_round)
             ->with(['question.translations', 'category.translations', 'answers'])
             ->first();
@@ -350,6 +350,7 @@ class GameEngine
 
         $game->current_round++;
         $game->rounds()->create([
+            'match_number' => $game->match_number,
             'number' => $game->current_round,
             'question_id' => $question->id,
             'category_id' => $question->category_id,

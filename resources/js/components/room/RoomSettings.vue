@@ -4,7 +4,6 @@ import { Check } from '@lucide/vue';
 import { computed, watch } from 'vue';
 import RangeSetting from '@/components/room/RangeSetting.vue';
 import { useTrans } from '@/composables/useTrans';
-import { update } from '@/routes/host/rooms';
 import type { CategoryOption, Range, RoomState } from '@/types/room';
 
 const props = defineProps<{
@@ -12,40 +11,82 @@ const props = defineProps<{
     categoryOptions: CategoryOption[];
     limits: { rounds: Range; secondsPerRound: Range; players: Range };
     locales: string[];
+    /** Where to save: the screen and the VIP's phone each have their own. */
+    action: string;
+    /** One column on a phone, so category names fit. */
+    narrow?: boolean;
 }>();
 
 const { t } = useTrans();
 
 const languageNames: Record<string, string> = { el: 'Ελληνικά', en: 'English' };
 
-const form = useForm({
-    rounds: props.room.settings.rounds,
-    seconds_per_round: props.room.settings.seconds_per_round,
-    max_players: props.room.settings.max_players,
-    locale: props.room.locale,
-    categories: props.room.categories.map((category) => category.id),
-});
+/** The room's current settings, in the form's shape. */
+function saved() {
+    return {
+        rounds: props.room.settings.rounds,
+        seconds_per_round: props.room.settings.seconds_per_round,
+        max_players: props.room.settings.max_players,
+        locale: props.room.locale,
+        categories: props.room.categories.map((category) => category.id),
+    };
+}
 
-// Settings save themselves shortly after the host stops changing them.
+function key(data: ReturnType<typeof saved>) {
+    return JSON.stringify({
+        ...data,
+        categories: [...data.categories].sort((a, b) => a - b),
+    });
+}
+
+const form = useForm(saved());
+
+// Settings save themselves shortly after someone stops changing them.
 let timer: ReturnType<typeof setTimeout> | undefined;
+
+function save() {
+    timer = undefined;
+    form.patch(props.action, {
+        preserveScroll: true,
+        preserveState: true,
+        // Saving in the background shouldn't flash the progress bar.
+        showProgress: false,
+        // Someone else may have changed something while this was saving.
+        onSuccess: () => timer === undefined && follow(),
+    });
+}
 
 watch(
     () => form.data(),
-    () => {
+    (data) => {
         clearTimeout(timer);
-        timer = setTimeout(
-            () =>
-                form.patch(update.url(props.room.code), {
-                    preserveScroll: true,
-                    preserveState: true,
-                    // Saving in the background shouldn't flash the progress bar.
-                    showProgress: false,
-                }),
-            350,
-        );
+        timer = undefined;
+
+        // Nothing to save: e.g. the form just took on a change made elsewhere.
+        if (key(data) !== key(saved())) {
+            timer = setTimeout(save, 350);
+        }
     },
     { deep: true },
 );
+
+/**
+ * Take on changes made on the other device (the screen or the VIP's phone),
+ * unless a change made here is about to be saved: then the latest one wins.
+ */
+function follow() {
+    if (timer !== undefined || form.processing) {
+        return;
+    }
+
+    const next = saved();
+
+    if (key(next) !== key(form.data())) {
+        Object.assign(form, next);
+    }
+}
+
+watch(saved, follow, { deep: true });
 
 function toggleCategory(id: number) {
     form.categories = form.categories.includes(id)
@@ -123,7 +164,10 @@ const availableQuestions = computed(() =>
                     t(':count questions', { count: availableQuestions })
                 }}</span>
             </div>
-            <div class="grid grid-cols-2 gap-2">
+            <div
+                class="grid gap-2"
+                :class="narrow ? 'grid-cols-1' : 'grid-cols-2'"
+            >
                 <button
                     v-for="category in categoryOptions"
                     :key="category.id"

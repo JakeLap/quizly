@@ -20,6 +20,7 @@ class Standings
         $stats = Answer::query()
             ->join('rounds', 'rounds.id', '=', 'answers.round_id')
             ->where('rounds.game_id', $game->id)
+            ->where('rounds.match_number', $game->match_number)
             ->where('rounds.status', RoundStatus::Revealed)
             ->where('answers.is_correct', true)
             ->groupBy('answers.player_id')
