@@ -7,15 +7,24 @@ import { initializeFlashToast } from '@/lib/flashToast';
 import { configureEcho } from '@laravel/echo-vue';
 import { channelAuthorization } from '@/lib/echoAuth';
 
+// Set by the server (see app.blade.php), so the same build works on any domain.
+const reverb = window.quizlyReverb;
+const tls = reverb.scheme === 'https';
+
 configureEcho({
     broadcaster: 'reverb',
+    key: reverb.key,
     // Phones reach the server by the same host name as the page, e.g. the
-    // computer's LAN address, so only override it when set explicitly.
-    wsHost: import.meta.env.VITE_REVERB_HOST || window.location.hostname,
+    // computer's LAN address, unless a websocket host is set.
+    wsHost: reverb.host || window.location.hostname,
+    wsPort: tls ? 80 : reverb.port,
+    wssPort: tls ? reverb.port : 443,
+    forceTLS: tls,
+    enabledTransports: ['ws', 'wss'],
     channelAuthorization,
 });
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Quizly';
 
 void createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),

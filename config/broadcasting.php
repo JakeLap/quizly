@@ -44,6 +44,14 @@ return [
                 // Reverb must not hold them up for long (the default is 30 s).
                 'timeout' => (float) env('REVERB_HTTP_TIMEOUT', 2),
             ],
+            // Where browsers connect. In Docker this differs from where the
+            // app sends broadcasts (the Reverb container, over plain HTTP):
+            // e.g. wss://ws.example.com:443. No host means the page's own host.
+            'client' => [
+                'host' => env('REVERB_PUBLIC_HOST'),
+                'port' => (int) env('REVERB_PUBLIC_PORT', env('REVERB_PORT', 8080)),
+                'scheme' => env('REVERB_PUBLIC_SCHEME', env('REVERB_SCHEME', 'http')),
+            ],
             'client_options' => [
                 // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html
                 'connect_timeout' => 1,

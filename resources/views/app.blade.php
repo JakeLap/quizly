@@ -34,6 +34,14 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
+        {{-- Where to reach the websocket server, read at run time so one build works anywhere. --}}
+        <script>
+            window.quizlyReverb = @json([
+                'key' => config('broadcasting.connections.reverb.key'),
+                ...config('broadcasting.connections.reverb.client'),
+            ]);
+        </script>
+
         @fonts
 
         @vite(['resources/css/app.css', 'resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
