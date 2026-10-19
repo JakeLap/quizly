@@ -262,7 +262,8 @@ screen reloads, it shows a hint to click once.
 
 The project started from the Laravel Vue starter kit, so it also contains the
 kit's user accounts, dashboard and settings pages (Fortify). The game itself
-doesn't use them.
+doesn't use them, so they're switched off: their routes answer 404 unless
+`QUIZLY_ACCOUNTS_ENABLED=true` (see `App\Http\Middleware\EnsureAccountsEnabled`).
 
 ## Project structure
 
@@ -368,7 +369,8 @@ sail artisan migrate --seed
 
 The seed creates the categories and imports all the questions, which takes
 about half a minute. It also creates the starter kit's test user
-(`test@example.com` / `password`), which the game doesn't need.
+(`test@example.com` / `password`), which the game doesn't need; accounts are
+switched off unless `QUIZLY_ACCOUNTS_ENABLED=true`.
 
 ```bash
 sail npm run build
@@ -446,6 +448,7 @@ Game behaviour is in `config/quizly.php`:
 | `results_visible_minutes` | 60 | The final results stay viewable, and the code reserved, for this long |
 | `empty_lobby_minutes` | 30 | A lobby nobody joined closes after this |
 | `prune_after_days` | 7 | Old games are deleted after this |
+| `accounts_enabled` | `false` | The starter kit's login, registration, dashboard and settings pages; off means they answer 404. Set `QUIZLY_ACCOUNTS_ENABLED=true` to turn them on |
 
 Websocket settings in `.env`:
 

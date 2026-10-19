@@ -35,6 +35,8 @@ declare module '@inertiajs/core' {
             locale: string;
             translations: Record<string, string>;
             sidebarOpen: boolean;
+            /** Whether login, registration and the account pages exist (QUIZLY_ACCOUNTS_ENABLED). */
+            accountsEnabled: boolean;
             [key: string]: unknown;
         };
     }

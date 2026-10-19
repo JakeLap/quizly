@@ -69,6 +69,7 @@ const { t } = useTrans();
             </div>
 
             <Link
+                v-if="$page.props.accountsEnabled"
                 :href="$page.props.auth.user ? dashboard() : login()"
                 class="text-sm text-white/40 hover:text-white/70"
             >

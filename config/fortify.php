@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureAccountsEnabled;
 use Laravel\Fortify\Features;
 
 return [
@@ -101,7 +102,8 @@ return [
     |
     */
 
-    'middleware' => ['web'],
+    // Fortify passes these on to the passkey routes too.
+    'middleware' => ['web', EnsureAccountsEnabled::class],
 
     /*
     |--------------------------------------------------------------------------

@@ -78,6 +78,7 @@ The rest have defaults in the Dockerfile and are optional:
 | `OCTANE_WORKERS` | `auto` | one per CPU |
 | `RUN_MIGRATIONS` | `true` | |
 | `SEED_CONTENT` | `true` | import changed questions on start |
+| `QUIZLY_ACCOUNTS_ENABLED` | `false` | the starter kit's login and account pages |
 
 Keep `APP_KEY` the same across deploys. It signs sessions and cookies, so
 changing it signs everyone out of their rooms.

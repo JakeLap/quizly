@@ -4,6 +4,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | User Accounts
+    |--------------------------------------------------------------------------
+    |
+    | Login, registration, the dashboard and the settings pages come from the
+    | starter kit. The game doesn't need them, so they're off (their routes
+    | answer 404) until there's a use for them, e.g. a question admin. See
+    | App\Http\Middleware\EnsureAccountsEnabled.
+    |
+    */
+
+    'accounts_enabled' => (bool) env('QUIZLY_ACCOUNTS_ENABLED', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Content Locales
     |--------------------------------------------------------------------------
     |

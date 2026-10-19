@@ -3,6 +3,7 @@
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Rooms\HostRoomController;
 use App\Http\Controllers\Rooms\PlayController;
+use App\Http\Middleware\EnsureAccountsEnabled;
 use App\Http\Middleware\EnsureRoomHost;
 use App\Http\Middleware\EnsureRoomPlayer;
 use Illuminate\Broadcasting\BroadcastController;
@@ -45,8 +46,11 @@ Route::prefix('play')->name('play.')->group(function () {
     });
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'Dashboard')->name('dashboard');
-});
+// The starter kit's account pages, switched off for now (see EnsureAccountsEnabled).
+Route::middleware(EnsureAccountsEnabled::class)->group(function () {
+    Route::middleware(['auth', 'verified'])->group(function () {
+        Route::inertia('dashboard', 'Dashboard')->name('dashboard');
+    });
 
-require __DIR__.'/settings.php';
+    require __DIR__.'/settings.php';
+});
