@@ -47,13 +47,12 @@ class PlayController extends Controller
             return $normalized ? to_route('play.show', $normalized) : to_route('play.create');
         }
 
-        $room = Game::findByCode($code);
+        $player = $this->currentPlayer();
+        $room = Game::findForVisitor($code, $player?->game);
 
         if ($room) {
             app()->setLocale($room->locale);
         }
-
-        $player = $this->currentPlayer();
 
         if ($room && $player?->game_id === $room->id) {
             // Keep the player's cookie alive for as long as they keep playing.

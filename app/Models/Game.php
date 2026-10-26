@@ -89,6 +89,24 @@ class Game extends Model
                 ->first();
     }
 
+    /**
+     * The room with this code as a visitor knows it: their own room (the one
+     * their host or player cookie belongs to) in whatever state it's in, so
+     * its screen and phones can still show that it closed; otherwise an
+     * active or just finished room.
+     */
+    public static function findForVisitor(string $code, ?self $own): ?self
+    {
+        // The usual case, a room in play, comes fresh from the database.
+        $found = static::findByCode($code);
+
+        if ($own !== null && $own->code === strtoupper($code) && ! $own->is($found)) {
+            return $own;
+        }
+
+        return $found;
+    }
+
     public static function findByHostToken(?string $token): ?self
     {
         if (blank($token)) {

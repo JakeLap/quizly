@@ -40,12 +40,30 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * {room} in a URL is the code of an active (or just finished) room.
+     * {room} in a URL is the code of the visitor's own room (even once it has
+     * closed), or else of an active or just finished room.
      */
     protected function configureRouteBindings(): void
     {
         Route::pattern('room', '['.RoomCode::ALPHABET.']{'.RoomCode::LENGTH.'}');
-        Route::bind('room', fn (string $code) => Game::findByCode($code) ?? abort(404));
+        Route::bind('room', fn (string $code) => Game::findForVisitor($code, $this->visitorsRoom()) ?? abort(404));
+    }
+
+    /**
+     * The room the visitor's host or player cookie belongs to. Each cookie is
+     * only sent under its own path (/host or /play), so at most one applies.
+     */
+    protected function visitorsRoom(): ?Game
+    {
+        $host = Auth::guard('host')->user();
+
+        if ($host instanceof Host) {
+            return $host->game;
+        }
+
+        $player = Auth::guard('player')->user();
+
+        return $player instanceof Player ? $player->game : null;
     }
 
     /**

@@ -74,10 +74,12 @@ test('only the host can see or run the room', function () {
     $this->withCookie(GuestCookies::HOST, 'other-host')->post(route('host.rooms.start', $room))->assertForbidden();
 });
 
-test('unknown or finished rooms are not found', function () {
-    hostedRoom(['code' => 'ABCD', 'status' => GameStatus::Finished]);
+test('old finished rooms are only found by their own screen', function () {
+    hostedRoom(['code' => 'ABCD', 'status' => GameStatus::Finished, 'finished_at' => now()->subDay()]);
 
-    asHost()->get('/host/ABCD')->assertNotFound();
+    $this->get('/host/ABCD')->assertNotFound();
+    Auth::forgetGuards();
+    asHost()->get('/host/ABCD')->assertOk();
     asHost()->get('/host/ZZZZ')->assertNotFound();
 });
 

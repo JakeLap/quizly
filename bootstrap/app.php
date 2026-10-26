@@ -11,6 +11,8 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -46,4 +48,29 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
+
+        // Errors on pages get a page in the game's style, instead of Laravel's
+        // (which Inertia would show in a modal). Requests made with fetch keep
+        // their JSON, and in development server errors keep their debug page.
+        $exceptions->respond(function (SymfonyResponse $response, Throwable $e, Request $request) {
+            $status = $response->getStatusCode();
+
+            if ($request->expectsJson()
+                || ! in_array($status, [403, 404, 405, 419, 429, 500, 503], true)
+                || ($status >= 500 && config('app.debug'))) {
+                return $response;
+            }
+
+            // The error may have happened before the middleware that sets these.
+            $locale = SetLocale::localeFor($request);
+            app()->setLocale($locale);
+            Inertia::share([
+                'locale' => $locale,
+                'translations' => HandleInertiaRequests::translations($locale),
+            ]);
+
+            return Inertia::render('Error', ['status' => $status])
+                ->toResponse($request)
+                ->setStatusCode($status);
+        });
     })->create();

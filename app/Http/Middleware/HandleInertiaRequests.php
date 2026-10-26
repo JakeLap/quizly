@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'accountsEnabled' => (bool) config('quizly.accounts_enabled'),
             'locale' => fn () => app()->getLocale(),
-            'translations' => fn () => $this->translations(app()->getLocale()),
+            'translations' => fn () => self::translations(app()->getLocale()),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }
@@ -54,7 +54,7 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, string>
      */
-    protected function translations(string $locale): array
+    public static function translations(string $locale): array
     {
         $path = lang_path("{$locale}.json");
 

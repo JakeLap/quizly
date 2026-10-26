@@ -20,15 +20,24 @@ class SetLocale
 
     public function handle(Request $request, Closure $next): Response
     {
+        app()->setLocale(self::localeFor($request));
+
+        return $next($request);
+    }
+
+    /**
+     * The language for this request (also used for error pages, which can
+     * happen before this middleware runs).
+     */
+    public static function localeFor(Request $request): string
+    {
         $room = $request->route('room');
         $picked = $request->cookie(self::COOKIE);
 
-        app()->setLocale(match (true) {
+        return match (true) {
             $room instanceof Game => $room->locale,
             in_array($picked, QuizlyConfig::locales(), true) => $picked,
             default => $request->getPreferredLanguage(QuizlyConfig::locales()) ?? config('quizly.default_locale'),
-        });
-
-        return $next($request);
+        };
     }
 }

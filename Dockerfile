@@ -12,7 +12,10 @@
 # Each can also run in a container of its own: pass web, reverb, clock or
 # scheduler as the command (see docker/entrypoint.sh).
 
-ARG PHP_VERSION=8.5
+# An exact patch release, so every build gets the same, patched PHP (8.5.12
+# fixes CVE-2026-109618 and CVE-2026-109619). Raise it with each PHP security
+# release: https://www.php.net/supported-versions.php
+ARG PHP_VERSION=8.5.12
 ARG NODE_VERSION=24
 
 # --- PHP with the extensions the app needs ------------------------------------
