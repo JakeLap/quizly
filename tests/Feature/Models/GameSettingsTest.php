@@ -17,6 +17,7 @@ test('defaults come from the quizly config', function () {
         'rounds' => 7,
         'seconds_per_round' => 15,
         'max_players' => 6,
+        'difficulties' => ['easy', 'medium', 'hard'],
     ]);
 });
 
@@ -27,6 +28,15 @@ test('missing keys fall back to the defaults', function () {
         ->and($settings->secondsPerRound)->toBe(config('quizly.seconds_per_round.default'))
         ->and($settings->maxPlayers)->toBe(config('quizly.players.default'));
 });
+
+test('rooms saved before difficulties could be chosen play them all', function () {
+    expect(GameSettings::fromArray(['rounds' => 5])->difficulties)->toBe(['easy', 'medium', 'hard'])
+        ->and(GameSettings::fromArray(['difficulties' => ['hard', 'nonsense', 'easy']])->difficulties)->toBe(['easy', 'hard']);
+});
+
+test('a room plays at least one difficulty', function () {
+    new GameSettings(10, 20, 8, []);
+})->throws(InvalidArgumentException::class);
 
 test('settings outside the allowed range are rejected', function (array $data) {
     GameSettings::fromArray($data);
@@ -47,7 +57,7 @@ test('the game model stores and restores settings', function () {
     $settings = $game->fresh()->settings;
 
     expect($settings)->toBeInstanceOf(GameSettings::class)
-        ->and($settings->toArray())->toBe(['rounds' => 12, 'seconds_per_round' => 30, 'max_players' => 4]);
+        ->and($settings->toArray())->toBe(['rounds' => 12, 'seconds_per_round' => 30, 'max_players' => 4, 'difficulties' => ['easy', 'medium', 'hard']]);
 });
 
 test('the game model accepts settings as an array', function () {

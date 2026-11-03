@@ -25,6 +25,7 @@ import { useRoom } from '@/composables/useRoom';
 import { useTrans } from '@/composables/useTrans';
 import { useWakeLock } from '@/composables/useWakeLock';
 import { postJson, stayInRoom } from '@/lib/http';
+import { questionCount } from '@/lib/questionCounts';
 import {
     close,
     heartbeat as heartbeatRoute,
@@ -159,7 +160,12 @@ const availableQuestions = computed(() =>
         )
         .reduce(
             (sum, category) =>
-                sum + (category.questionCounts[room.value.locale] ?? 0),
+                sum +
+                questionCount(
+                    category,
+                    room.value.locale,
+                    room.value.settings.difficulties,
+                ),
             0,
         ),
 );

@@ -8,6 +8,7 @@ use App\Enums\QuestionSource;
 use App\Enums\QuestionStatus;
 use App\Models\Category;
 use App\Models\Question;
+use App\Rules\DistinctOptions;
 use App\Support\QuizlyConfig;
 use Closure;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,7 @@ use Illuminate\Validation\Rule;
  *     {
  *       "ref": "seed-geography-001",
  *       "category": "geography",
+ *       "kind": null,
  *       "difficulty": "easy",
  *       "correct": 0,
  *       "source": "manual",
@@ -64,9 +66,11 @@ class ImportQuestions
                 continue;
             }
 
-            $this->importOne($validator->validated(), $status)
-                ? $result->created++
-                : $result->updated++;
+            match ($this->importOne($validator->validated(), $status)) {
+                'created' => $result->created++,
+                'updated' => $result->updated++,
+                'kept' => $result->kept++,
+            };
         }
 
         return $result;
@@ -98,9 +102,9 @@ class ImportQuestions
 
     /**
      * @param  array<string, mixed>  $data
-     * @return bool Whether a new question was created.
+     * @return 'created'|'updated'|'kept'
      */
-    private function importOne(array $data, QuestionStatus $status): bool
+    private function importOne(array $data, QuestionStatus $status): string
     {
         return DB::transaction(function () use ($data, $status) {
             $source = QuestionSource::from($data['source'] ?? QuestionSource::Manual->value);
@@ -112,8 +116,14 @@ class ImportQuestions
 
             $isNew = ! $question->exists;
 
+            // Edited in the admin: the edit wins over the file.
+            if (! $isNew && $question->edited_at !== null) {
+                return 'kept';
+            }
+
             $question->fill([
                 'category_id' => $this->categoryIds()[$data['category']],
+                'kind' => $data['kind'] ?? $this->kindFromRef($source, $ref),
                 'difficulty' => Difficulty::from($data['difficulty'] ?? Difficulty::Medium->value),
                 'correct_index' => $data['correct'],
                 'source' => $source,
@@ -140,7 +150,7 @@ class ImportQuestions
                 ]);
             }
 
-            return $isNew;
+            return $isNew ? 'created' : 'updated';
         });
     }
 
@@ -153,6 +163,7 @@ class ImportQuestions
 
         return [
             'ref' => ['nullable', 'string', 'max:255'],
+            'kind' => ['nullable', 'string', 'max:64'],
             'category' => ['required', 'string', Rule::in(array_keys($this->categoryIds()))],
             'difficulty' => ['nullable', Rule::enum(Difficulty::class)],
             'correct' => ['required', 'integer', 'between:0,'.($optionCount - 1)],
@@ -161,15 +172,28 @@ class ImportQuestions
             'status' => ['nullable', Rule::in([QuestionStatus::Draft->value, QuestionStatus::Review->value, QuestionStatus::Published->value])],
             'translations.*' => ['array:text,options,explanation'],
             'translations.*.text' => ['required', 'string', 'max:500'],
-            'translations.*.options' => ['required', 'array', "size:{$optionCount}"],
             'translations.*.options.*' => ['required', 'string', 'max:120'],
+            'translations.*.options' => ['required', 'array', "size:{$optionCount}", new DistinctOptions],
             'translations.*.explanation' => ['nullable', 'string', 'max:1000'],
             'translations' => ['required', 'array', 'min:1', $this->validTranslations(...)],
         ];
     }
 
     /**
-     * Translations must use supported locales and offer distinct options.
+     * Generated questions' refs start with the template that made them, e.g.
+     * "country-calling-code:Q142"; that's their kind.
+     */
+    private function kindFromRef(QuestionSource $source, ?string $ref): ?string
+    {
+        if ($source !== QuestionSource::Wikidata || $ref === null || ! str_contains($ref, ':')) {
+            return null;
+        }
+
+        return strstr($ref, ':', true) ?: null;
+    }
+
+    /**
+     * Translations must use supported locales.
      */
     private function validTranslations(string $attribute, mixed $value, Closure $fail): void
     {
@@ -178,17 +202,6 @@ class ImportQuestions
 
         if ($unknown !== []) {
             $fail('Unsupported locale(s): '.implode(', ', $unknown).'.');
-        }
-
-        foreach ($translations as $locale => $translation) {
-            $options = array_map(
-                fn ($option) => is_string($option) ? mb_strtolower(trim($option)) : $option,
-                (array) ($translation['options'] ?? []),
-            );
-
-            if (count($options) !== count(array_unique($options, SORT_REGULAR))) {
-                $fail("The {$locale} options must all be different.");
-            }
         }
     }
 

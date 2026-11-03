@@ -16,6 +16,11 @@ return [
 
     'accounts_enabled' => (bool) env('QUIZLY_ACCOUNTS_ENABLED', false),
 
+    // Signing up is separate: with accounts on (e.g. for the question admin),
+    // nobody can create an account unless this is on too. Admins are created
+    // with `php artisan quizly:make-admin`.
+    'registration_enabled' => (bool) env('QUIZLY_REGISTRATION_ENABLED', false),
+
     /*
     |--------------------------------------------------------------------------
     | Content Locales
@@ -132,6 +137,32 @@ return [
     */
 
     'options_per_question' => 4,
+
+    /*
+    | Question kinds that feel like the same question, e.g. "In which year did
+    | X win the Nobel Prize in Physics?" and "…in Chemistry?". A game spreads
+    | its rounds over families, so it doesn't keep asking the same thing.
+    | Kinds not listed are a family of their own.
+    */
+    'question_families' => [
+        'nobel-physics-year' => 'nobel-year',
+        'nobel-chemistry-year' => 'nobel-year',
+        'nobel-medicine-year' => 'nobel-year',
+        'nobel-literature-year' => 'nobel-year',
+        'nobel-peace-year' => 'nobel-year',
+        'country-capital' => 'capitals',
+        'capital-country' => 'capitals',
+        'element-symbol' => 'element-symbols',
+        'symbol-element' => 'element-symbols',
+        'greek-deity-father' => 'deity-parents',
+        'greek-deity-mother' => 'deity-parents',
+        'club-city' => 'club-home',
+        'club-country' => 'club-home',
+        'country-calling-code' => 'country-codes',
+        'country-internet-domain' => 'country-codes',
+        'song-performer' => 'performers',
+        'album-performer' => 'performers',
+    ],
 
     // Where the question seeder reads its JSON files from.
     'question_files' => database_path('data/questions'),

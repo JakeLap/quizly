@@ -44,12 +44,13 @@ class StartGame
             $available = Question::query()
                 ->playableIn($game->locale)
                 ->whereIn('category_id', $game->categories()->select('categories.id'))
+                ->whereIn('difficulty', $game->settings->difficulties)
                 ->whereNotIn('id', $game->rounds()->select('question_id'))
                 ->count();
 
             if ($available < $game->settings->rounds) {
                 throw ValidationException::withMessages([
-                    'start' => __('The chosen categories only have :count questions for :rounds rounds. Pick more categories or fewer rounds.', [
+                    'start' => __('The chosen categories and difficulties only have :count questions for :rounds rounds. Pick more of them, or fewer rounds.', [
                         'count' => $available,
                         'rounds' => $game->settings->rounds,
                     ]),

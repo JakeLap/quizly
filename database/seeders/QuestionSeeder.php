@@ -35,7 +35,7 @@ class QuestionSeeder extends Seeder
                 throw new RuntimeException("Invalid questions in {$file->getRelativePathname()}: ".json_encode(array_slice($result->failed, 0, 5), JSON_UNESCAPED_UNICODE));
             }
 
-            $this->command->info("{$file->getRelativePathname()}: {$result->created} created, {$result->updated} updated.");
+            $this->command->info("{$file->getRelativePathname()}: {$result->created} created, {$result->updated} updated, {$result->kept} kept (edited in the admin).");
         }
     }
 }

@@ -4,7 +4,6 @@ import { Smartphone, Tv } from '@lucide/vue';
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 import GameBackground from '@/components/room/GameBackground.vue';
 import { useTrans } from '@/composables/useTrans';
-import { dashboard, login } from '@/routes';
 import { store as createRoom } from '@/routes/host/rooms';
 import { create as join } from '@/routes/play';
 
@@ -67,14 +66,6 @@ const { t } = useTrans();
                     }}</span>
                 </Link>
             </div>
-
-            <Link
-                v-if="$page.props.accountsEnabled"
-                :href="$page.props.auth.user ? dashboard() : login()"
-                class="text-sm text-white/40 hover:text-white/70"
-            >
-                {{ t('Admin') }}
-            </Link>
         </main>
     </GameBackground>
 </template>

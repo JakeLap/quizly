@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Auth\Host;
 use App\Models\Game;
 use App\Models\Player;
+use App\Models\User;
 use App\Support\GuestCookies;
 use App\Support\RoomCode;
 use Carbon\CarbonImmutable;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -37,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureGuestAuth();
         $this->configureRateLimiting();
         $this->configureRouteBindings();
+        $this->configureGates();
     }
 
     /**
@@ -64,6 +67,14 @@ class AppServiceProvider extends ServiceProvider
         $player = Auth::guard('player')->user();
 
         return $player instanceof Player ? $player->game : null;
+    }
+
+    /**
+     * Admins (users.is_admin) manage the questions.
+     */
+    protected function configureGates(): void
+    {
+        Gate::define('manage-questions', fn (User $user) => $user->is_admin);
     }
 
     /**

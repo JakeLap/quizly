@@ -7,10 +7,17 @@ export type RoomStatus =
     | 'finished'
     | 'abandoned';
 
+/** Question difficulties, easiest first. */
+export const DIFFICULTIES = ['easy', 'medium', 'hard'] as const;
+
+export type QuestionDifficulty = (typeof DIFFICULTIES)[number];
+
 export type RoomSettings = {
     rounds: number;
     seconds_per_round: number;
     max_players: number;
+    /** Which difficulties of question the room plays. */
+    difficulties: QuestionDifficulty[];
 };
 
 export type RoomCategory = {
@@ -101,7 +108,8 @@ export type CategoryOption = {
     icon: string | null;
     color: string | null;
     names: Record<string, string>;
-    questionCounts: Record<string, number>;
+    /** Playable questions per language and difficulty, e.g. questionCounts.el.easy. */
+    questionCounts: Record<string, Partial<Record<QuestionDifficulty, number>>>;
 };
 
 export type Range = { min: number; max: number; default: number };

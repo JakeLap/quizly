@@ -19,6 +19,9 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        // Sign-ups are off unless QUIZLY_REGISTRATION_ENABLED is set.
+        abort_unless(config('quizly.registration_enabled'), 404);
+
         Validator::make($input, [
             ...$this->profileRules(),
             'password' => $this->passwordRules(),

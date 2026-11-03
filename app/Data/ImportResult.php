@@ -8,6 +8,9 @@ final class ImportResult
 
     public int $updated = 0;
 
+    /** Questions edited in the admin, whose content the import left alone. */
+    public int $kept = 0;
+
     /**
      * @var list<array{index: int, ref: string|null, errors: list<string>}>
      */

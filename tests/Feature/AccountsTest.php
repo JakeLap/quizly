@@ -2,7 +2,6 @@
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Inertia\Testing\AssertableInertia as Assert;
 
 uses(RefreshDatabase::class);
 
@@ -38,13 +37,6 @@ test('nobody can register while accounts are off', function () {
     ])->assertNotFound();
 
     expect(User::query()->count())->toBe(0);
-});
-
-test('the start page hides the admin link while accounts are off', function () {
-    $this->get('/')->assertOk()->assertInertia(fn (Assert $page) => $page->where('accountsEnabled', false));
-
-    config(['quizly.accounts_enabled' => true]);
-    $this->get('/')->assertInertia(fn (Assert $page) => $page->where('accountsEnabled', true));
 });
 
 test('the game keeps working while accounts are off', function () {

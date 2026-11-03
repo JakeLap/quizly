@@ -41,7 +41,6 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
-            'accountsEnabled' => (bool) config('quizly.accounts_enabled'),
             'locale' => fn () => app()->getLocale(),
             'translations' => fn () => self::translations(app()->getLocale()),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',

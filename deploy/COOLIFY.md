@@ -78,7 +78,8 @@ The rest have defaults in the Dockerfile and are optional:
 | `OCTANE_WORKERS` | `auto` | one per CPU |
 | `RUN_MIGRATIONS` | `true` | |
 | `SEED_CONTENT` | `true` | import changed questions on start |
-| `QUIZLY_ACCOUNTS_ENABLED` | `false` | the starter kit's login and account pages |
+| `QUIZLY_ACCOUNTS_ENABLED` | `false` | login and the question admin |
+| `QUIZLY_REGISTRATION_ENABLED` | `false` | signing up; keep it off and create admins with `quizly:make-admin` |
 
 Keep `APP_KEY` the same across deploys. It signs sessions and cookies, so
 changing it signs everyone out of their rooms.
@@ -97,6 +98,10 @@ come on top.
   under Logs.
 - **Artisan:** open the app's **Terminal** in Coolify and run e.g.
   `php artisan about`.
+- **Question admin:** set `QUIZLY_ACCOUNTS_ENABLED=true`, redeploy, then
+  create your admin account in the Terminal with
+  `php artisan quizly:make-admin you@example.com`, and log in at `/login`.
+  The questions are at `/admin/questions`.
 - **New questions:** commit the regenerated files in
   `database/data/questions/` and deploy. The next start imports them. To
   import again without changes, run `php artisan quizly:seed-content --force`.

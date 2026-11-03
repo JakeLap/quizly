@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Rooms\HostRoomController;
 use App\Http\Controllers\Rooms\PlayController;
@@ -53,4 +54,10 @@ Route::middleware(EnsureAccountsEnabled::class)->group(function () {
     });
 
     require __DIR__.'/settings.php';
+
+    // Managing the questions: signed-in admins only.
+    Route::middleware(['auth', 'verified', 'can:manage-questions'])->prefix('admin')->name('admin.')->group(function () {
+        Route::resource('questions', QuestionController::class)->except('show');
+        Route::patch('questions/{question}/status', [QuestionController::class, 'updateStatus'])->name('questions.status');
+    });
 });

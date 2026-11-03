@@ -4,7 +4,14 @@ import { Check } from '@lucide/vue';
 import { computed, watch } from 'vue';
 import RangeSetting from '@/components/room/RangeSetting.vue';
 import { useTrans } from '@/composables/useTrans';
-import type { CategoryOption, Range, RoomState } from '@/types/room';
+import { questionCount } from '@/lib/questionCounts';
+import { DIFFICULTIES } from '@/types/room';
+import type {
+    CategoryOption,
+    QuestionDifficulty,
+    Range,
+    RoomState,
+} from '@/types/room';
 
 const props = defineProps<{
     room: RoomState;
@@ -27,6 +34,7 @@ function saved() {
         rounds: props.room.settings.rounds,
         seconds_per_round: props.room.settings.seconds_per_round,
         max_players: props.room.settings.max_players,
+        difficulties: [...props.room.settings.difficulties],
         locale: props.room.locale,
         categories: props.room.categories.map((category) => category.id),
     };
@@ -36,6 +44,7 @@ function key(data: ReturnType<typeof saved>) {
     return JSON.stringify({
         ...data,
         categories: [...data.categories].sort((a, b) => a - b),
+        difficulties: DIFFICULTIES.filter((d) => data.difficulties.includes(d)),
     });
 }
 
@@ -94,14 +103,33 @@ function toggleCategory(id: number) {
         : [...form.categories, id];
 }
 
+/** At least one difficulty stays on: the last one can't be switched off. */
+function toggleDifficulty(difficulty: QuestionDifficulty) {
+    const on = form.difficulties.includes(difficulty);
+
+    if (on && form.difficulties.length === 1) {
+        return;
+    }
+
+    form.difficulties = DIFFICULTIES.filter((d) =>
+        d === difficulty ? !on : form.difficulties.includes(d),
+    );
+}
+
+const difficultyNames: Record<QuestionDifficulty, string> = {
+    easy: 'Easy',
+    medium: 'Medium',
+    hard: 'Hard',
+};
+
+function countFor(category: CategoryOption) {
+    return questionCount(category, form.locale, form.difficulties);
+}
+
 const availableQuestions = computed(() =>
     props.categoryOptions
         .filter((category) => form.categories.includes(category.id))
-        .reduce(
-            (sum, category) =>
-                sum + (category.questionCounts[form.locale] ?? 0),
-            0,
-        ),
+        .reduce((sum, category) => sum + countFor(category), 0),
 );
 </script>
 
@@ -127,6 +155,42 @@ const availableQuestions = computed(() =>
                     {{ languageNames[locale] ?? locale }}
                 </button>
             </div>
+        </div>
+
+        <div class="grid gap-2">
+            <span
+                id="difficulties-label"
+                class="text-sm font-medium text-white/80"
+                >{{ t('Difficulties') }}</span
+            >
+            <div
+                class="grid grid-cols-3 gap-2 rounded-xl bg-black/20 p-1"
+                role="group"
+                aria-labelledby="difficulties-label"
+            >
+                <button
+                    v-for="difficulty in DIFFICULTIES"
+                    :key="difficulty"
+                    type="button"
+                    class="flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold transition"
+                    :class="
+                        form.difficulties.includes(difficulty)
+                            ? 'bg-white text-indigo-900 shadow'
+                            : 'text-white/80 hover:bg-white/10'
+                    "
+                    :aria-pressed="form.difficulties.includes(difficulty)"
+                    @click="toggleDifficulty(difficulty)"
+                >
+                    <Check
+                        v-if="form.difficulties.includes(difficulty)"
+                        class="size-3.5"
+                    />
+                    {{ t(difficultyNames[difficulty]) }}
+                </button>
+            </div>
+            <p v-if="form.errors.difficulties" class="text-sm text-rose-300">
+                {{ form.errors.difficulties }}
+            </p>
         </div>
 
         <RangeSetting
@@ -180,7 +244,7 @@ const availableQuestions = computed(() =>
                     "
                     :disabled="
                         !form.categories.includes(category.id) &&
-                        !category.questionCounts[form.locale]
+                        !countFor(category)
                     "
                     @click="toggleCategory(category.id)"
                 >
@@ -201,7 +265,7 @@ const availableQuestions = computed(() =>
                         category.names[form.locale] ?? category.slug
                     }}</span>
                     <span class="text-xs text-white/50 tabular-nums">{{
-                        category.questionCounts[form.locale] ?? 0
+                        countFor(category)
                     }}</span>
                 </button>
             </div>

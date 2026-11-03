@@ -21,6 +21,7 @@
         <env name="APP_ENV" value="testing"/>
         <!-- The starter kit's account tests need the accounts on; AccountsTest turns them off. -->
         <env name="QUIZLY_ACCOUNTS_ENABLED" value="true"/>
+        <env name="QUIZLY_REGISTRATION_ENABLED" value="true"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="BROADCAST_CONNECTION" value="null"/>

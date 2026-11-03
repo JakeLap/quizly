@@ -22,8 +22,9 @@ Questions come in **Greek** (the main language) and **English**.
 
 - **Rooms with a code and QR code.** The screen creates a room, and players
   join at `/play` with a nickname: 2–12 players, no sign-up.
-- **Game settings:** language, categories, number of rounds (1–30), time per
-  question (5–60 s) and maximum players. The host sets them on the screen.
+- **Game settings:** language, difficulties (easy, medium, hard: any
+  mix), categories, number of rounds (1–30), time per question (5–60 s) and
+  maximum players. The host sets them on the screen.
   The **VIP**, the first player to join, can also set them from their phone,
   and both stay in sync.
 - **Speed scoring.** A correct answer is worth 1000 points if it's instant,
@@ -170,10 +171,24 @@ Phase lengths (from `config/quizly.php`):
 A question ends early once every connected player has answered. The host can
 also skip a phase.
 
-**Picking questions** (`App\Game\QuestionPicker`): the picker draws a random
-selected category first, then a random question from it. That way a big
-category doesn't crowd out the small ones. A question already used in the
-room, including in earlier games, is never picked again.
+**Picking questions** (`App\Game\QuestionPicker`) is built for variety.
+Every question has a **type** (`questions.kind`): generated questions get
+their Wikidata template, e.g. `country-calling-code`, and admins can give
+hand-written ones a type. Similar types form one **family**, listed in
+`config/quizly.php → question_families`, e.g. the five "Nobel Prize year"
+templates. For each round, the picker looks only at questions of the
+room's categories and difficulties, and chooses:
+
+1. the category the game has asked least so far;
+2. within it, the family it has asked least, each family equally likely
+   however many questions it has. A category's hand-written questions
+   without a type count as one family;
+3. a random question from that family.
+
+Ties are broken at random, but not in favour of what the previous round
+asked. So a type only comes back once the category's others have had a
+turn, and categories don't come twice in a row. A question already used in
+the room, including in earlier games, is never picked again.
 
 **Scoring** (`App\Game\ScoreCalculator`, `App\Game\Standings`): response time
 is measured on the server, from the moment answers open
@@ -222,6 +237,39 @@ questions instead of duplicating them. In production,
 `php artisan quizly:seed-content` runs on every start, but only imports when
 the files have changed.
 
+### Question admin
+
+Admins manage the questions at `/admin/questions`. It's built with the
+starter kit's shadcn-vue components and works on phones too:
+
+- **The list** can be filtered by status, category, difficulty and source,
+  and searched by wording, answers or `#id`. Each question's menu can publish
+  it, reject it, or send it to review or back to draft.
+- **The editor** has one card per language. The answers keep the same order
+  in every language, so the correct one is marked once for all of them. A
+  language with every field left empty isn't translated. The optional
+  **type** groups similar questions, e.g. `flags`, so a game spreads them
+  out; it suggests the types already in use.
+- **Only published questions are played.** Statuses are draft, review,
+  published and rejected.
+- **Edits survive imports.** Changing a question's wording, answers,
+  category or difficulty sets `edited_at`, and imports then leave that
+  question's content alone. A status change alone doesn't count as an edit.
+- **Deleting** is only possible for questions written in the admin that
+  haven't been played. A question from the files would come back with the
+  next import, so reject it instead.
+
+The admin needs accounts switched on (`QUIZLY_ACCOUNTS_ENABLED=true`). Signing
+up stays off unless `QUIZLY_REGISTRATION_ENABLED=true`, so admins are created
+from the command line:
+
+```bash
+php artisan quizly:make-admin you@example.com
+```
+
+That creates the account (asking for a name and password), or makes an
+existing user an admin.
+
 ### Languages
 
 The UI strings are in `lang/el.json`; English is the source text.
@@ -264,6 +312,7 @@ The project started from the Laravel Vue starter kit, so it also contains the
 kit's user accounts, dashboard and settings pages (Fortify). The game itself
 doesn't use them, so they're switched off: their routes answer 404 unless
 `QUIZLY_ACCOUNTS_ENABLED=true` (see `App\Http\Middleware\EnsureAccountsEnabled`).
+Accounts are what the [question admin](#question-admin) signs in with.
 
 ## Project structure
 
@@ -448,7 +497,8 @@ Game behaviour is in `config/quizly.php`:
 | `results_visible_minutes` | 60 | The final results stay viewable, and the code reserved, for this long |
 | `empty_lobby_minutes` | 30 | A lobby nobody joined closes after this |
 | `prune_after_days` | 7 | Old games are deleted after this |
-| `accounts_enabled` | `false` | The starter kit's login, registration, dashboard and settings pages; off means they answer 404. Set `QUIZLY_ACCOUNTS_ENABLED=true` to turn them on |
+| `accounts_enabled` | `false` | Login, the dashboard, settings and the question admin; off means they answer 404. Set `QUIZLY_ACCOUNTS_ENABLED=true` to turn them on |
+| `registration_enabled` | `false` | Signing up, separately from logging in. Set `QUIZLY_REGISTRATION_ENABLED=true` to allow it |
 
 Websocket settings in `.env`:
 

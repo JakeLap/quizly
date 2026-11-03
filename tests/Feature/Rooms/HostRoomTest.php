@@ -91,12 +91,13 @@ test('the host can change the settings', function () {
         'rounds' => 5,
         'seconds_per_round' => 30,
         'max_players' => 4,
+        'difficulties' => ['hard', 'easy'],
         'locale' => 'en',
         'categories' => $categories->pluck('id')->all(),
     ])->assertRedirect()->assertSessionHasNoErrors();
 
     $room->refresh();
-    expect($room->settings)->toEqual(new GameSettings(5, 30, 4))
+    expect($room->settings)->toEqual(new GameSettings(5, 30, 4, ['easy', 'hard']))
         ->and($room->locale)->toBe('en')
         ->and($room->categories->pluck('id')->sort()->values()->all())->toBe($categories->pluck('id')->sort()->values()->all())
         ->and($room->state_version)->toBe(1);
@@ -113,6 +114,7 @@ test('invalid settings are rejected', function (array $overrides, string $field)
         'rounds' => 10,
         'seconds_per_round' => 20,
         'max_players' => 8,
+        'difficulties' => ['easy', 'medium', 'hard'],
         'locale' => 'el',
         'categories' => [$category->id],
     ], $overrides);
@@ -128,6 +130,8 @@ test('invalid settings are rejected', function (array $overrides, string $field)
     'too many players' => [['max_players' => 13], 'max_players'],
     'unsupported language' => [['locale' => 'de'], 'locale'],
     'no categories' => [['categories' => []], 'categories'],
+    'no difficulties' => [['difficulties' => []], 'difficulties'],
+    'an unknown difficulty' => [['difficulties' => ['easy', 'impossible']], 'difficulties.1'],
     'inactive category' => [['categories' => 'inactive'], 'categories.0'],
 ]);
 
@@ -139,6 +143,7 @@ test('the player limit cannot go below the players already in the room', functio
         'rounds' => 10,
         'seconds_per_round' => 20,
         'max_players' => 2,
+        'difficulties' => ['easy', 'medium', 'hard'],
         'locale' => 'el',
         'categories' => [Category::factory()->create()->id],
     ])->assertSessionHasErrors('max_players');
@@ -199,7 +204,32 @@ test('the game does not start with fewer questions than rounds', function () {
     Player::factory()->for($room)->count(2)->create();
 
     asHost()->post(route('host.rooms.start', $room))
-        ->assertSessionHasErrors(['start' => __('The chosen categories only have :count questions for :rounds rounds. Pick more categories or fewer rounds.', ['count' => 3, 'rounds' => 5])]);
+        ->assertSessionHasErrors(['start' => __('The chosen categories and difficulties only have :count questions for :rounds rounds. Pick more of them, or fewer rounds.', ['count' => 3, 'rounds' => 5])]);
+});
+
+test('only questions of the chosen difficulties count towards starting', function () {
+    $room = hostedRoom(['settings' => ['rounds' => 3, 'difficulties' => ['hard']], 'locale' => 'el']);
+    $category = Category::factory()->create();
+    Question::factory()->for($category)->count(2)->create(['difficulty' => 'hard']);
+    Question::factory()->for($category)->count(5)->create(['difficulty' => 'easy']);
+    $room->categories()->attach($category);
+    Player::factory()->for($room)->count(2)->create();
+
+    asHost()->post(route('host.rooms.start', $room))
+        ->assertSessionHasErrors(['start' => __('The chosen categories and difficulties only have :count questions for :rounds rounds. Pick more of them, or fewer rounds.', ['count' => 2, 'rounds' => 3])]);
+});
+
+test('the screen gets question counts per language and difficulty', function () {
+    $room = hostedRoom();
+    $category = Category::factory()->create();
+    Question::factory()->for($category)->count(2)->create(['difficulty' => 'hard']);
+    Question::factory()->for($category)->translatedInto(['en'])->create(['difficulty' => 'easy']);
+
+    asHost()->get(route('host.rooms.show', $room))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('categoryOptions.0.questionCounts.el', ['easy' => 0, 'medium' => 0, 'hard' => 2])
+            ->where('categoryOptions.0.questionCounts.en', ['easy' => 1, 'medium' => 0, 'hard' => 2])
+            ->where('room.settings.difficulties', ['easy', 'medium', 'hard']));
 });
 
 test('closing the room frees its code', function () {

@@ -178,6 +178,7 @@ test('the VIP can change the settings from their phone, other players cannot', f
         'rounds' => 5,
         'seconds_per_round' => 30,
         'max_players' => 4,
+        'difficulties' => ['medium'],
         'locale' => 'en',
         'categories' => $categories->pluck('id')->all(),
     ];
@@ -187,7 +188,7 @@ test('the VIP can change the settings from their phone, other players cannot', f
     $this->withCookie(GuestCookies::PLAYER, 'vip-token')->patch(route('play.update', $room), $settings)->assertSessionHasNoErrors();
 
     $room->refresh();
-    expect($room->settings)->toEqual(new GameSettings(5, 30, 4))
+    expect($room->settings)->toEqual(new GameSettings(5, 30, 4, ['medium']))
         ->and($room->locale)->toBe('en')
         ->and($room->categories->pluck('id')->sort()->values()->all())->toBe($categories->pluck('id')->sort()->values()->all());
     Event::assertDispatched(RoomUpdated::class);
@@ -206,7 +207,7 @@ test('the VIP\'s settings are validated like the host\'s', function () {
     Auth::forgetGuards();
 
     $this->withCookie(GuestCookies::PLAYER, 'vip-token')
-        ->patch(route('play.update', $room), ['rounds' => 5, 'seconds_per_round' => 20, 'max_players' => 8, 'locale' => 'el', 'categories' => [Category::factory()->create()->id]])
+        ->patch(route('play.update', $room), ['rounds' => 5, 'seconds_per_round' => 20, 'max_players' => 8, 'difficulties' => ['easy'], 'locale' => 'el', 'categories' => [Category::factory()->create()->id]])
         ->assertSessionHasErrors('settings');
 });
 

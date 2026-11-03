@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int $id
  * @property int $category_id
+ * @property string|null $kind What kind of question, e.g. its Wikidata template; null for one-offs.
  * @property Difficulty $difficulty
  * @property int $correct_index
  * @property QuestionStatus $status
@@ -28,12 +29,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $license
  * @property int $times_asked
  * @property int $times_correct
+ * @property CarbonImmutable|null $edited_at When its content was last changed in the admin.
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property-read Category $category
  * @property-read Collection<int, QuestionTranslation> $translations
  */
-#[Fillable(['category_id', 'difficulty', 'correct_index', 'status', 'source', 'source_ref', 'license'])]
+#[Fillable(['category_id', 'kind', 'difficulty', 'correct_index', 'status', 'source', 'source_ref', 'license'])]
 class Question extends Model
 {
     /** @use HasFactory<QuestionFactory> */
@@ -96,6 +98,7 @@ class Question extends Model
             'status' => QuestionStatus::class,
             'source' => QuestionSource::class,
             'correct_index' => 'integer',
+            'edited_at' => 'datetime',
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Data\GameSettings;
 use App\Models\Category;
 
 /**
@@ -27,7 +28,8 @@ final class SettingsOptions
     }
 
     /**
-     * Every active category, with its names and how many questions it has per language.
+     * Every active category, with its names and how many questions it has
+     * per language and difficulty: questionCounts.el.easy, and so on.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -35,9 +37,13 @@ final class SettingsOptions
     {
         $locales = QuizlyConfig::locales();
 
-        $counts = collect($locales)->mapWithKeys(fn (string $locale) => [
-            "questions as questions_{$locale}" => fn ($query) => $query->playableIn($locale),
-        ])->all();
+        $counts = [];
+
+        foreach ($locales as $locale) {
+            foreach (GameSettings::ALL_DIFFICULTIES as $difficulty) {
+                $counts["questions as questions_{$locale}_{$difficulty}"] = fn ($query) => $query->playableIn($locale)->where('difficulty', $difficulty);
+            }
+        }
 
         return Category::query()
             ->active()
@@ -54,7 +60,9 @@ final class SettingsOptions
                     $locale => $category->translation($locale)->name ?? $category->slug,
                 ])->all(),
                 'questionCounts' => collect($locales)->mapWithKeys(fn (string $locale) => [
-                    $locale => (int) $category->getAttribute("questions_{$locale}"),
+                    $locale => collect(GameSettings::ALL_DIFFICULTIES)->mapWithKeys(fn (string $difficulty) => [
+                        $difficulty => (int) $category->getAttribute("questions_{$locale}_{$difficulty}"),
+                    ])->all(),
                 ])->all(),
             ])
             ->values()
